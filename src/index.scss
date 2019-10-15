@@ -1,0 +1,25 @@
+
+
+// abstracts 
+@import './sass/base/fonts' ; 
+@import './sass/abstracts/varables'  ;   
+@import './sass/abstracts/mixins'  ;   
+
+
+//base 
+@import './sass/base/utilities'  ;   
+@import './sass/base/base' ; 
+
+//layouts 
+
+// components 
+@import './sass/components/layoute.scss' ; 
+@import './sass/components/navigation' ; 
+@import './sass/components/header' ; 
+@import './sass/components/menu' ; 
+@import './sass/components/course'  ; 
+@import './sass/components/table'  ; 
+@import './sass/components/form'  ; 
+
+
+

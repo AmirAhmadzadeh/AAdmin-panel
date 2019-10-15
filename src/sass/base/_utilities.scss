@@ -1,0 +1,30 @@
+
+
+
+
+a{
+    text-decoration: none ;
+}
+
+.heading{
+    font-size: 3rem ;  
+    display: inline-block ;
+    font-weight: 300 ;
+    transition: all .5s ;
+    transform:translateX(-3rem);
+    &:hover{
+        cursor: pointer;
+        transform: skew(-40deg) scale(1.25) translateX(-3rem);
+    }
+    &__first{
+        color: $color-gray-1; 
+    }
+   
+    &__scondary{  
+        color: $color-black ; 
+     
+    }
+
+
+    
+}
