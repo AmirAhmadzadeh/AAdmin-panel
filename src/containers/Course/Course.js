@@ -3,78 +3,81 @@ import { Tabs, Tab } from '@material-ui/core';
 import CreateCourse from './CreateCourse/CreateCourse';
 import CourseTable from './CourseTable/CourseTable';
 import { connect } from 'react-redux';
-import { fetchCourse ,fetchCategory } from '../../store/action/';
+import { fetchCourse, fetchCategory } from '../../store/action/';
+import useValue from './../../hooks/useValue';
 
 
+function Course(props) {
+    const [value, setValue] = useValue();
 
-class Course extends Component {
-
-    state = {
-        value: 1
-    }
-
-    componentDidMount = () => {
-
-        this.props.loadCourses() ; 
-        this.props.loadCats() ; 
-    }
-
-    handleChange = (event, value) => {
-        this.setState({
-            value
-        });
-    }
+    useEffect(() => {
+        props.loadCourses();
+        props.loadCats();
+    })
 
 
+    function getContent() {
 
-    render() {
-        
-        let content = null;
 
-        if (this.state.value === 0) {
-            content = <CourseTable  courses={this.props.courses}/>
-        }
-        else if (this.state.value === 1) {
-            content = <CreateCourse cats={this.props.cats} />
+        if (value === 0) {
+            return <CourseTable courses={props.courses} />
         }
 
-        return (
-            <div className="menu">
-                <h1 className="heading__scondary heading">
+        return <CreateCourse cats={props.cats} />
+
+    }
+
+
+    return (
+        <div className="menu">
+           
+            <h1 className="heading__scondary heading">
                 دوره ها
-            </h1>
+        </h1>
 
-                    <Tabs
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
-                    >
-                        <Tab label="مشاهده ی لیست دوره ها" className="menu__tab-label" />
-                        <Tab label="ایجاد دوره جدید " className="menu__tab-label" />
-                    </Tabs>
-                    <div className="menu__cmpArea">
-                        {content}
-                    </div>
-
-
+            <Tabs
+                value={value}
+                
+                onChange={(e,value) => setValue(value)}
+                
+                indicatorColor="primary"
+                
+                textColor="primary"
+                
+                centered
+            >
+                
+                <Tab label="مشاهده ی لیست دوره ها" className="menu__tab-label" />
+                
+                <Tab label="ایجاد دوره جدید " className="menu__tab-label" />
+            
+            </Tabs>
+           
+            <div className="menu__cmpArea">
+              
+                {getContent()}
+           
             </div>
-        )
-    }
+
+        </div>
+    )
+
 }
+
+
+
 const mapDispatchToProps = dispatch => {
     return {
-        loadCourses: () => dispatch((fetchCourse()))  , 
-        loadCats : () => dispatch(fetchCategory())
+        loadCourses: () => dispatch((fetchCourse())),
+        loadCats: () => dispatch(fetchCategory())
     }
 }
 
 const mapStateToProps = state => {
 
     return {
-        courses: state.course.courses , 
-        cats : state.cats.categories
+        courses: state.course.courses,
+        cats: state.cats.categories
     }
 }
 

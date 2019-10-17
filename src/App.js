@@ -1,32 +1,32 @@
-import React, { Component } from 'react'; 
-import Layout from './containers/Layout/Layout'  ;  
-import Auth from './containers/Auth/Auth' ;
+import React, { useEffect } from 'react';
+import Layout from './containers/Layout/Layout';
+import Auth from './containers/Auth/Auth';
 
 
 
-class App extends Component {
+
+function App(props) {
+
+  useEffect(() => {
+    console.log(`amir is here [ test ]`, localStorage.getItem('accessToken'));
+  }) ; 
   
-
-  componentDidMount = () => {
-    console.log(`amir is here [ test ]` , localStorage.getItem('accessToken') ) ;
+  function getContent() {
   
+    if (localStorage.getItem('accessToken'))  return <Layout /> 
+  
+    return  <Layout />
+   
   }
- 
-  render() {
-    let content = null ;   
-    if (localStorage.getItem('accessToken') ) {
-        content = <Layout />
-    } else {
-       //change it   content = <App />
-       content = <Layout /> 
-    }
- 
-    return (
-      <div className="app" >
-         { content }
-      </div>
-    );
-  }
+
+  return (
+    <div className="app" >
+  
+      {getContent}
+  
+    </div>
+  
+  ) ; 
 }
 
 

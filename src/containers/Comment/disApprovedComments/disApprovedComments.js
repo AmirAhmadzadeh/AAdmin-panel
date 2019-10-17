@@ -10,7 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 
-const approvedCommnts = (props) => {
+const DisapprovedCommnts = (props) => {
     let comments = [];
 
     if (props.comments) {
@@ -54,5 +54,5 @@ const approvedCommnts = (props) => {
     );
 }
 
-export default approvedCommnts;
+export default DisapprovedCommnts;
 

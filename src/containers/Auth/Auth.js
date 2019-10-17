@@ -3,18 +3,15 @@
 
 
 
-import React, { Component } from 'react'
+import React from 'react'
 
-class Auth extends Component {
-  render() {
-    return (
-      <div className="auth">
-           Auth component 
-      </div>
-    )
-  }
+const Auth = () => {
+  return (
+    <div className="auth">
+      Auth component
+   </div>);
 }
 
+export default Auth;
 
 
-export default Auth  ; 

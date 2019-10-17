@@ -10,7 +10,6 @@ const navigation = (props) => {
         <Aux>
 
             <nav className="navigation">
-
                 <div className="navigation__brand">
                     <BrandIcon className="navigation__brand--icon" />
                     <h1 className="navigation__brand--name"> پنل مدیریت  </h1>

@@ -4,71 +4,55 @@ import ApprovedComments from './approvedComments/ApprovedComments';
 import { Tabs, Tab } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { fetchComment } from '../../store/action/';
+import useValue from './../../hooks/useValue';
 
 
 
-class Commnet extends Component {
+
+function Commnet(props) {
+    const [value, setValue] = useValue();
+
+    useEffect(() => {
+        console.log(`Hello In  Mount`);
+        props.loadcomments(value === 0 ? false : true);
+    })
 
 
+    function getContent() {
 
-    state = {
-        value: 0  
+        if (state.value === 0) {
+            return <ApprovedComments comments={props.comments} />
         }
-
-
-
-    handleChange = (event, value) => {
-        this.setState(prevState => {
-            return {
-                value
-            }
-        });
-    }
-
-
-
-    shouldComponentUpdate = (nextProps, nextstate) => {
-        return (nextstate.value !== this.state.value)  ;
-    }
-
-
-   
-    componentDidMount = () => {
-        console.log(`Hello In  Mount` ) ; 
-        this.props.loadcomments(this.state.value === 0 ? false : true );
-    }
-
-
-    render() {
-        let content = null;
-
-        if (this.state.value === 0) {
-            content = <ApprovedComments comments={this.props.comments} />
+        else {
+            return <DisApprovedComments comments={props.comments} />
         }
-        else{
-            content = <DisApprovedComments comments={this.props.comments} />
-        }
+    }
+    // shouldComponentUpdate = (nextProps, nextstate) => {
+    //     return (value !== value);
+    // }
 
-        return (
-            <div className="menu">
-                <h1 className="heading__scondary">
+
+    return (
+        <div className="menu">
+            <h1 className="heading__scondary">
                 کامنت ها
                 </h1>
-                    <Tabs
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
-                    >
-                        <Tab label="کامنت های تایید شده" className="menu__tab-label" />
-                        <Tab label="کامنت های تایید نشده" className="menu__tab-label" />
-                    </Tabs>
-                    <div className="menu__cmpArea">
-                        {content}
-                    </div>
-            </div>);
-    }
+            <Tabs
+                value={value}
+                onChange={(e,value) => setValue(value)}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+            >
+                <Tab label="کامنت های تایید شده" className="menu__tab-label" />
+                <Tab label="کامنت های تایید نشده" className="menu__tab-label" />
+            </Tabs>
+            <div className="menu__cmpArea">
+                {getContent()}
+            </div>
+        </div>);
+
+
 }
 
 

@@ -8,7 +8,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
-const approvedCommnts = (props) => {
+const ApprovedCommnts = (props) => {
     let comments = [];
     if (props.comments) {
         comments = props.comments.map(commentItem => {
@@ -50,6 +50,6 @@ const approvedCommnts = (props) => {
     );
 }
 
-export default approvedCommnts;
+export default ApprovedCommnts;
 
 

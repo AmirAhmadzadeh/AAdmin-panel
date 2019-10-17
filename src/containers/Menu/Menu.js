@@ -7,63 +7,48 @@ import CreateMenu from './CreateMenu/CreateMenu';
 import MenuTable from './MenuTable/MenuTable';
 import { connect } from 'react-redux';
 import { fetchmenu } from '../../store/action/';
+import useValue from './../../hooks/useValue';
 
+function Menu(props) {
+    const [value, setValue] = useValue();
 
+    useEffect(() => {
+        props.loadmenus();
+    })
 
-class Menu extends Component {
+    function getContent() {
 
-    state = {
-        value: 0
-    }
-
-    componentDidMount = () => {
-        this.props.loadmenus() ;  
-    }
-
-    handleChange = (event, value) => {
-        this.setState({
-            value
-        });
-    }
-
-
-
-    render() {
-        
-        let content = null;
-
-        if (this.state.value === 0) {
-            content = <MenuTable  menus={this.props.menus}/>
+        if (value === 0) {
+            return <MenuTable menus={props.menus} />
         }
-        else if (this.state.value === 1) {
-            content = <CreateMenu menus={this.props.menus}/>
-        }
+        return <CreateMenu menus={props.menus} />
 
-        return (
-            <div className="menu">
-                <h1 className="heading__scondary">
-                    منو ها
-            </h1>
-
-                    <Tabs
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
-                    >
-                        <Tab label="مشاهده ی لیست منو ها" className="menu__tab-label" />
-                        <Tab label="ایجاد منوی جدید " className="menu__tab-label" />
-                    </Tabs>
-                    <div className="menu__cmpArea">
-                        {content}
-                    </div>
-
-
-            </div>
-        )
     }
+
+    return (<div className="menu">
+        <h1 className="heading__scondary">
+            منو ها
+        </h1>
+
+        <Tabs
+            value={value}
+            onChange={(e, value) => setValue(value)}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+        >
+            <Tab label="مشاهده ی لیست منو ها" className="menu__tab-label" />
+            <Tab label="ایجاد منوی جدید " className="menu__tab-label" />
+        </Tabs>
+        <div className="menu__cmpArea">
+            {getContent()}
+        </div>
+    </div>)
+
 }
+
+
+
 const mapDispatchToProps = dispatch => {
     return {
         loadmenus: () => dispatch(fetchmenu())
