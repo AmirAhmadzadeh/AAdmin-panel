@@ -8,12 +8,13 @@ import useValue from './../../hooks/useValue';
 
 
 function Episode(props) {
+  
     const [value, setValue] = useValue();
 
     useEffect(() => {
         props.loadCourses();
         props.loadEpsiodes();
-    })
+    }, [ value ])
 
     function getContent() {
         if (value === 0) {

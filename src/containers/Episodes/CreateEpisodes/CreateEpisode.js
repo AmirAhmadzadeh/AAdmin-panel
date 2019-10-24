@@ -4,9 +4,7 @@
 
 
 
-import React, { Component } from 'react'
-import Aux from '../../../hoc/Aux';
-// import Editor from '../../../components/Editor/Editor';
+import React, { useEffect } from 'react'
 import {
   Button, 
   FormGroup, TextField, FormControl,
@@ -14,11 +12,14 @@ import {
 
 } from '@material-ui/core';
 
+import useInputState from './../../../hooks/useInputState'
 
-// cahnge this to functional component 
-class CreateEpisode extends Component {
+export default function CreateEpisode (props) { 
 
-  state = {
+
+  /**
+   * 
+   * state = {
     title: null,
     selectedKindOfCourse: "free",
     categories: [],
@@ -31,79 +32,64 @@ class CreateEpisode extends Component {
   }
 
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+  */
+
+    const [title , setTitle] = useInputState('') ; 
+  
+    return(
+      <React.Fragment>
+     
+      <FormControl className="form__controller">
+        <TextField
+          label="عنوان ویدیو"
+          className="form__controller--inp"
+          onChange={e => { setTitle(e.target.value)  }}
+          name="title" 
+        />
+      </FormControl>
 
 
-  handleChangeMultiple = (event) => {
-    this.setState({
-      categories: event.target.value
-    })
-  }
+      <Button> sakhtan</Button>
 
-
-  componentDidMount = () => {
-    console.log(this.props.courses, '[hello some tsst]');
-  }
-
-
-
-
-  onEditorChange(event) {
-
-    console.log(event.editor.getData(), `[<== test]`);
-    const courseText = event.editor.getData();
-    this.setState({
-      courseText
-    });
-  }
+    </React.Fragment>
+    )
+}
 
 
 
-  // changeCourseText = (event) => {
-  //   console.log(event.target.value, `[<== test 2]`);
-  // }
+/**
+ * <FormControl className="form__controller">
+        <TextField
+          label="زمان ویدیو"
+          className="form__controller--inp"
+          onChange={this.handleChange}
+          inputProps={{
+            name: "time"
+          }}
+        />
+      </FormControl>
 
 
 
-  render() {
-    return (
+      <FormControl className="form__controller">
+        <TextField
+          label="شماره ی ویدیو"
+          className="form__controller--inp"
+          onChange={this.handleChange}
+          inputProps={{
+            name: "numberOfVideo"
+          }}
+        />
+      </FormControl>
 
-      <Aux>
-        {/* <Paper> */}
-
-        <FormControl className="form__controller">
-          <TextField
-            label="عنوان ویدیو"
-            className="form__controller--inp"
-            onChange={this.handleChange}
-            inputProps={{
-              name: "title"
-            }}
-          />
-        </FormControl>
+      <br />
 
 
+      <FormGroup>
 
         <FormControl className="form__controller">
           <TextField
-            label="زمان ویدیو"
-            className="form__controller--inp"
-            onChange={this.handleChange}
-            inputProps={{
-              name: "time"
-            }}
-          />
-        </FormControl>
-
-
-
-        <FormControl className="form__controller">
-          <TextField
-            label="شماره ی ویدیو"
+            label=" لینک ویدیو"
             className="form__controller--inp"
             onChange={this.handleChange}
             inputProps={{
@@ -111,113 +97,132 @@ class CreateEpisode extends Component {
             }}
           />
         </FormControl>
+      </FormGroup>
+      <FormControl className="form__controller">
+        <label className="form__controller--label">
+          نوع
+          ویدیو
+            </label>
+        <Select
+          className="form__controller--select"
+          native
+          value={this.selectedMenuItemLevel ? this.state.selectedMenuItemLevel.name : null}
+          onChange={this.handleChange}
 
-        <br />
+          inputProps={{
+            name: 'selectedKindOfEpisode'
+            // id: 'age-native-simple',
+          }}
+        >
+          <option value="free" className="form__controller--option">  رایگان </option>
+          <option value="vip" className="form__controller--option">  دسترسی با عضویت ویژه </option>
+          <option value="cash" className="form__controller--option">نقدی </option>
+
+        </Select>
+      </FormControl>
 
 
-        <FormGroup>
+      <FormControl className="form__controller">
+        <label className="form__controller--label">
+          دوره مربوطه
+            </label>
+        <Select
 
-          <FormControl className="form__controller">
-            <TextField
-              label=" لینک ویدیو"
-              className="form__controller--inp"
-              onChange={this.handleChange}
-              inputProps={{
-                name: "numberOfVideo"
-              }}
-            />
-          </FormControl>
-        </FormGroup>
-        <FormControl className="form__controller">
-          <label className="form__controller--label">
-            نوع
-            ویدیو
-              </label>
-          {/* <InputLabel htmlFor="age-native-simple" className="form__controller--label">نوع دوره</InputLabel> */}
-          <Select
-            className="form__controller--select"
-            native
-            value={this.selectedMenuItemLevel ? this.state.selectedMenuItemLevel.name : null}
-            onChange={this.handleChange}
+          className="form__controller--select"
+          native
+          value={this.state.relavantCourse}
+          onChange={this.handleChange}
+          inputProps={{
+            name: 'relavantCourse'
+            // id: 'age-native-simple',
+          }}
 
-            inputProps={{
-              name: 'selectedKindOfEpisode'
-              // id: 'age-native-simple',
-            }}
-          >
-            <option value="free" className="form__controller--option">  رایگان </option>
-            <option value="vip" className="form__controller--option">  دسترسی با عضویت ویژه </option>
-            <option value="cash" className="form__controller--option">نقدی </option>
+        // MenuProps={MenuProps}
+        >
+          {this.props.courses ? this.props.courses.map(courseItem => (
+            <option value={courseItem._id} key={courseItem._id} className="form__controller--option">  {courseItem.title} </option>
+          )) : null}
+        </Select>
+      </FormControl>
+      <FormGroup>
 
-          </Select>
+
+
+
+        <FormControl>
+          <label className="form__controller--label"> توضیح ویدیو </label>
+       
+
+          <textarea name="courseText" onChange={this.handleChange} />       
         </FormControl>
-
-
-        <FormControl className="form__controller">
-          {/* <InputLabel htmlFor="select-multiple-checkbox" className="form__controller--label">دسته ها</InputLabel> */}
-          <label className="form__controller--label">
-            دوره مربوطه
-              </label>
-          <Select
-
-            className="form__controller--select"
-            native
-            value={this.state.relavantCourse}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'relavantCourse'
-              // id: 'age-native-simple',
-            }}
-
-          // MenuProps={MenuProps}
-          >
-            {this.props.courses ? this.props.courses.map(courseItem => (
-              <option value={courseItem._id} key={courseItem._id} className="form__controller--option">  {courseItem.title} </option>
-            )) : null}
-          </Select>
-        </FormControl>
-        <FormGroup>
-
-
-
-
-          <FormControl>
-            <label className="form__controller--label"> توضیح ویدیو </label>
-            {/* <Editor data={this.state.courseText}
-              chagedData={this.onEditorChange}
-            /> */}
-
-            <textarea name="courseText" onChange={this.handleChange} />       
-          </FormControl>
-        </FormGroup>
+      </FormGroup>
 
 
 
 
 
+ */
+// // cahnge this to functional component 
+// class CreateEpisode extends Component {
+
+//   state = {
+//     title: null,
+//     selectedKindOfCourse: "free",
+//     categories: [],
+//     price: 0,
+//     tags: null,
+//     slug: "",
+//     courseText: " سلام",
+//     courseImage: null,
+//     relavantCourse: null
+//   }
+
+
+//   handleChange = (event) => {
+//     this.setState({
+//       [event.target.name]: event.target.value
+//     })
+//   }
+
+
+//   handleChangeMultiple = (event) => {
+//     this.setState({
+//       categories: event.target.value
+//     })
+//   }
+
+
+//   componentDidMount = () => {
+//     console.log(this.props.courses, '[hello some tsst]');
+//   }
 
 
 
-        <Button> sakhtan</Button>
+
+//   onEditorChange(event) {
+
+//     console.log(event.editor.getData(), `[<== test]`);
+//     const courseText = event.editor.getData();
+//     this.setState({
+//       courseText
+//     });
+//   }
 
 
 
+//   // changeCourseText = (event) => {
+//   //   console.log(event.target.value, `[<== test 2]`);
+//   // }
 
 
 
+//   render() {
+//     return (
+
+   
+
+//     )
+//   }
+// }
 
 
-
-
-        {/* </Paper > */}
-
-
-
-      </Aux>
-
-    )
-  }
-}
-
-
-export default CreateEpisode; 
