@@ -15,7 +15,7 @@ function Commnet(props) {
     useEffect(() => {
         console.log(`Hello In  Mount`);
         props.loadcomments(value === 0 ? false : true);
-    })
+    } , [ value ] )
 
 
     function getContent() {
