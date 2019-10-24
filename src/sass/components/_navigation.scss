@@ -3,7 +3,11 @@
 
 //admin panel navigation
 .navigation{
-   
+
+    @include respond(from-port){ 
+        width: 17%;
+        position: fixed;
+    }
     height: 100vh ;
     background-image: linear-gradient(rgba($color-black ,.75) 100%,transparent) ,url('./assets/sidebar-2.d30c9e30.jpg') ;
     background-size: cover ; 
