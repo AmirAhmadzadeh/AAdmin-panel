@@ -1,7 +1,7 @@
 
 
 
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { Tabs, Tab } from '@material-ui/core';
 import CreateMenu from './CreateMenu/CreateMenu';
 import MenuTable from './MenuTable/MenuTable';

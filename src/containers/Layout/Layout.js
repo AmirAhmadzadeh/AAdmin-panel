@@ -6,7 +6,7 @@ import useBoolean from './../../hooks/useBoolean';
 
 
 
-function Layout(params) {
+function Layout(props) {
     const [show, toggleShow] = useBoolean(false);
     const [BackDrop, toggleBackDrop] = useBoolean(false);
     function toggleMenu() {

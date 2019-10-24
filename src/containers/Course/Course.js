@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { Tabs, Tab } from '@material-ui/core';
 import CreateCourse from './CreateCourse/CreateCourse';
 import CourseTable from './CourseTable/CourseTable';
@@ -13,7 +13,7 @@ function Course(props) {
     useEffect(() => {
         props.loadCourses();
         props.loadCats();
-    })
+    },[value]) ; 
 
 
     function getContent() {

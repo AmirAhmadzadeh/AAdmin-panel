@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import DisApprovedComments from './disApprovedComments/disApprovedComments';
 import ApprovedComments from './approvedComments/ApprovedComments';
 import { Tabs, Tab } from '@material-ui/core';
@@ -20,7 +20,7 @@ function Commnet(props) {
 
     function getContent() {
 
-        if (state.value === 0) {
+        if (value === 0) {
             return <ApprovedComments comments={props.comments} />
         }
         else {

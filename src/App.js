@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Layout from './containers/Layout/Layout';
-import Auth from './containers/Auth/Auth';
 
 
 
@@ -8,7 +7,7 @@ import Auth from './containers/Auth/Auth';
 function App(props) {
 
   useEffect(() => {
-    console.log(`amir is here [ test ]`, localStorage.getItem('accessToken'));
+    // console.log(`amir is here [ test ]`, localStorage.getItem('accessToken'));
   }) ; 
   
   function getContent() {
@@ -18,11 +17,11 @@ function App(props) {
     return  <Layout />
    
   }
-
+  console.log(getContent())
   return (
     <div className="app" >
   
-      {getContent}
+      {getContent()}
   
     </div>
   
