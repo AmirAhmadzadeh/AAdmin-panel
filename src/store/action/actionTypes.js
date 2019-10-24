@@ -27,7 +27,14 @@ export const FETCH_COURSES = 'FETCH_COURSES'  ;
 export const FETCH_COURSES_SUCCESS = 'FETCH_COURSES_SUCCESS'  ; 
 export const FETCH_COURSES_FAILED = 'FETCH_COURSES_FAILED'  ; 
 
-
+//creating course action types 
+export const CREATE_COURSE = 'CREATE_COURSE'  ; 
+export const CREATE_COURSE_SUCCESS = 'CREATE_COURSE_SUCCESS'  ; 
+export const CREATE_COURSE_FAILED = 'CREATE_COURSE_FAILED'  ; 
+//delete post 
+export const DELETE_COURSE = 'DELETE_COURSE' ; 
+export const DELETE_COURSE_FAILED = 'DELETE_COURSE_FAILED' ; 
+export const DELETE_COURSE_SUCCESS = 'DELETE_COURSE_SUCCESS' ; 
 
 //Epsiodes
 

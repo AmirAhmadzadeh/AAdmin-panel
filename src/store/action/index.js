@@ -16,7 +16,9 @@ export {
 
 
 export {
-    fetchCourse
+    fetchCourse , 
+    createCourse , 
+    deleteCourse 
 } from './course' ; 
 
 

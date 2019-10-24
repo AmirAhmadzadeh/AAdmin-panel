@@ -5,12 +5,12 @@ import * as actionTypes from './../action/actionTypes';
 
 
 const initState = {
-    courses: null
+    courses: null , created  : null  , error : false
 }
 
 
 
-const commentReducer = (state = initState, action) => {
+const courseReducer = (state = initState, action) => {
 
     switch (action.type) {
 
@@ -22,7 +22,22 @@ const commentReducer = (state = initState, action) => {
             }
         }
 
-       
+        case actionTypes.CREATE_COURSE_SUCCESS : {
+            return { 
+                ...state   , created : true 
+            }
+        }
+
+        case actionTypes.CREATE_COURSE_FAILED : { 
+            return {
+                 ...state , created  : false , error : true     
+            }
+        }   
+        
+        case actionTypes.DELETE_COURSE_SUCCESS : {
+            return { ...state }
+        }
+        
         default:
             return {
                 ...state
@@ -32,4 +47,4 @@ const commentReducer = (state = initState, action) => {
 }
 
 
-export default commentReducer;  
+export default courseReducer;  
