@@ -21,7 +21,8 @@ const categoryTable = (props) => {
                         <IconButton className="table__icon" color="primary" aria-label="Edit">
                             <EditIcon />
                         </IconButton>
-                        <IconButton className="table__icon" color="secondary" aria-label="Edit">
+                        <IconButton onClick={() => props.deleteCategory(catItem._id)
+                        } className="table__icon" color="secondary" aria-label="Edit">
                             <DeleteIcon />
                         </IconButton>
                     </TableCell>
@@ -29,7 +30,7 @@ const categoryTable = (props) => {
             );
         });
     } else {
-        catItems = "Loading..." ;
+        catItems = "Loading...";
     }
 
     return (
@@ -43,7 +44,7 @@ const categoryTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                       {catItems} 
+                    {catItems}
                 </TableBody>
             </Table>
         </Paper>

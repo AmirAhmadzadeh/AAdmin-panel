@@ -11,9 +11,9 @@ import CategoryTable from './CategoryTable/CategoryTable';
 
 import { connect } from 'react-redux';
 
-import { fetchCategory } from '../../store/action/';
+import { fetchCategory, makeNewCat, deleteCat  } from '../../store/action/';
 
-import useValue from './../../hooks/useValue';
+import { useValue } from './../../hooks/';
 
 
 function Category(props) {
@@ -26,18 +26,25 @@ function Category(props) {
 
     }, [value])
 
-
+    const handleMakeNewCat = (data) => {
+        props.makeNewCat(data);
+        setValue(0)
+    }
+    const handleDeleteCat = (id) => {  
+       
+        props.deleteCategory(id) ; 
+    }
     function getContent() {
 
         if (value === 0) {
 
-            return <CategoryTable cats={props.cats} />
+            return <CategoryTable deleteCategory={handleDeleteCat} cats={props.cats} />
 
         }
 
         else if (value === 1) {
 
-            return <CreateCategory cats={props.cats} />
+            return <CreateCategory createNewCategory={handleMakeNewCat} cats={props.cats} />
 
         }
 
@@ -90,7 +97,10 @@ const mapDispatchToProps = dispatch => {
     return {
 
         loadCats: () => dispatch(fetchCategory())
+        ,
+        makeNewCat: (data) => dispatch(makeNewCat(data)) , 
 
+        deleteCategory : (id) => dispatch(deleteCat(id))
     }
 }
 
