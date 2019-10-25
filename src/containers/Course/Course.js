@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 import { fetchCourse, fetchCategory, createCourse , deleteCourse } from '../../store/action/';
 
-import useValue from './../../hooks/useValue';
+import {useValue} from './../../hooks/';
 
 
 function Course(props) {

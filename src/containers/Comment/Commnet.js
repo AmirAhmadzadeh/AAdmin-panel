@@ -4,7 +4,7 @@ import ApprovedComments from './approvedComments/ApprovedComments';
 import { Tabs, Tab } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { fetchComment } from '../../store/action/';
-import useValue from './../../hooks/useValue';
+import {useValue} from './../../hooks';
 
 
 

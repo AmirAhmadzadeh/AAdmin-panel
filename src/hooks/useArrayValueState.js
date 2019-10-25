@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 
-export default function (initVal = []) {
+export  function useArrayValueState (initVal = []) {
 
     const [state, setState] = useState(initVal);
 

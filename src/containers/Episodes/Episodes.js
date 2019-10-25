@@ -4,7 +4,7 @@ import EpisodeTable from './EpisodeTable/EpisodeTable';
 import CreateEpisode from './CreateEpisodes/CreateEpisode';
 import { connect } from 'react-redux';
 import { fetchEpisode, fetchCourse } from '../../store/action/';
-import useValue from './../../hooks/useValue';
+import {useValue} from './../../hooks';
 
 
 function Episode(props) {

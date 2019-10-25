@@ -3,27 +3,33 @@
 import React, { useEffect } from 'react'
 
 import {
+  
   Button,
-  FormGroup, TextField, FormControl,
+  
+  FormGroup, 
+  
+  TextField,
+  
+  FormControl,
+  
   Select,
+  
   Input,
+  
   MenuItem,
+  
   Checkbox,
+  
   ListItemText,
+  
   InputLabel
+
 } from '@material-ui/core';
 
-import useInputState from './../../../hooks/useInputState';
 
-import useValueState from './../../../hooks/useValue';
-
-import useArrayValueState from './../../../hooks/useArrayValueState';
-
-import useFilePicker from './../../../hooks/useFilePicker';
-
+import { useArrayValueState, useBoolean, useFilePicker, useInputState, useValue } from './../../../hooks/'
 
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import useBoolean from '../../../hooks/useBoolean';
 
 
 
@@ -31,13 +37,13 @@ export default function ({ makeNewCourse, cats }) {
 
   const [title, setTitle] = useInputState('');
 
-  const [price, setPrice] = useValueState(null);
+  const [price, setPrice] = useValue(null);
 
   const [slug, setSlug] = useInputState('');
 
   const [tag, setTag] = useInputState('');
 
-  const [kindOfCourse, setKindOfCourse] = useValueState('free');
+  const [kindOfCourse, setKindOfCourse] = useValue('free');
 
   const [categories, setCategories] = useArrayValueState([]);
 
@@ -45,28 +51,34 @@ export default function ({ makeNewCourse, cats }) {
 
   const [canSendReq, toggleCanUse, setCanSendReq] = useBoolean(false);
 
-  const [errorMsg, setErrorMsg] = useValueState(null);
+  const [errorMsg, setErrorMsg] = useValue(null);
 
   const [courseText, setCourseText] = useInputState('');
+
 
 
   function handleSubmit() {
 
     if (canSendReq) {
       setErrorMsg(null);
-      console.log('helooooooo amir')
+      
 
       const data = {
-        slug, categories, title, type: kindOfCourse, body: courseText, price, tags: tag, file: courseImage
+        slug, categories,
+        title, type: kindOfCourse,
+        body: courseText,
+        price, tags: tag,
+        file: courseImage
       }
-      // console.log('amir is hre ', data);
+      
       makeNewCourse(data);
 
     } else {
       setErrorMsg('Error In Creating Course Please Check youre Inputs');
     }
+  
   }
-
+ 
 
 
 
@@ -213,7 +225,7 @@ export default function ({ makeNewCourse, cats }) {
               onChange={(e) => setCategories(e.target.value)}
               input={<Input id="select-multiple-checkbox" />}
               renderValue={selected => selected.join(', ')}
-            // MenuProps={MenuProps}
+
             >
               {
                 cats ? cats.map(catItem => (
@@ -222,29 +234,17 @@ export default function ({ makeNewCourse, cats }) {
                     <ListItemText primary={catItem.name} />
                   </MenuItem>
                 )) : null
-                }
-                
+              }
+
             </Select>
           </FormControl>
         </FormGroup>
 
         <FormGroup>
-          {/* <ImageUploader
-            // errorOcurred={handleImagePickerError}
-            imageSelected={handlePickImage}    
-            /> */}
+
           <label className="form__controller--label">
             تصویر دوره
             </label>
-          {/* <TextValidator
-            // value={JSON.stringify(courseImage)}
-            type="file"
-            name="file"
-            onChange={(e) => { setImage(e.target.files[0]) }}
-            validators={['required']}
-            errorMessages={['لطفا چیزی  را بنویسید !']}
-            variant="filled"
-          /> */}
 
           <Input
             // value={courseImage}

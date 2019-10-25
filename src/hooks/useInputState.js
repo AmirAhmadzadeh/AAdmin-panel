@@ -5,7 +5,7 @@ import { useState } from 'react' ;
 
 
 
-export default  function(initVal = '') { 
+export function useInputState(initVal = '') { 
     const [state , setState] = useState(initVal) ;
    
     const setValue = (val) => {

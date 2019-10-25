@@ -1,10 +1,13 @@
+
 import Routes from '../../routes/Routes';
+
 import React, { Component } from 'react'
+
 import Header from './../../components/Header/Header';
+
 import Navigation from './../../components/Navigation/Navigation';
-import useBoolean from './../../hooks/useBoolean';
 
-
+import { useBoolean } from '../../hooks'
 
 function Layout(props) {
     const [show, toggleShow] = useBoolean(false);
