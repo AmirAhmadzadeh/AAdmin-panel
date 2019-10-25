@@ -12,7 +12,6 @@ const categoryReducer = (state = initState , action ) => {
     switch (action.type) { 
       
         case actionTypes.FETCH_CATEGORY_SUCCESS: {
-            console.log(`YESYYYYYY`) ;    
             return {
                 ...state  , 
                 categories : action.data  

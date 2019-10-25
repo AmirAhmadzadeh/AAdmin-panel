@@ -2,7 +2,9 @@
 
 
 export {
-   fetchmenu 
+   fetchmenu , 
+    makeNewMenu , 
+    deleteMenu
 } from './menu' ; 
 
 export {
@@ -11,7 +13,9 @@ export {
 
 
 export {
-    fetchCategory
+    fetchCategory , 
+    makeNewCat , 
+    deleteCat
 } from './category' ; 
 
 

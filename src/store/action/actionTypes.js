@@ -1,10 +1,16 @@
 
-
+// menu 
 export const FETCH_MENUS = 'FETCH_MENUS'  ; 
 export const FETCH_MENUS_SUCCESS = 'FETCH_MENUS_SUCCESS'  ; 
 export const FETCH_MENUS_FAILED = 'FETCH_MENUS_FAILED'  ; 
 
+export const MAKE_MENU = 'MAKE_MENU' ;
+export const MAKE_MENU_SUCCESS = 'MAKE_MENU_SUCCESS' ;
+export const MAKE_MENU_FAILED = 'MAKE_MENU_FAILED' ;
 
+export const delete_MENU = 'delete_MENU' ; 
+export const delete_MENU_FAILED = 'delete_MENU_FAILED' ; 
+export const delete_MENU_SUCCESS = 'delete_MENU_SUCCESS' ; 
 
 //   comments 
 
@@ -20,6 +26,15 @@ export const FETCH_COMMENTS_FAILED = 'FETCH_COMMENTS_FAILED'  ;
 export const FETCH_CATEGORY = 'FETCH_CATEGORY'  ; 
 export const FETCH_CATEGORY_SUCCESS = 'FETCH_CATEGORY_SUCCESS'  ; 
 export const FETCH_CATEGORY_FAILED = 'FETCH_CATEGORY_FAILED'  ; 
+
+
+export const MAKE_CATEGORY = 'MAKE_CATEGORY'  ; 
+export const MAKE_CATEGORY_SUCCESS = 'MAKE_CATEGORY_SUCCESS'  ; 
+export const MAKE_CATEGORY_FAILED = 'MAKE_CATEGORY_FAILED'  ; 
+
+export const delete_CATEGORY = 'delete_CATEGORY'  ; 
+export const delete_CATEGORY_SUCCESS = 'delete_CATEGORY_SUCCESS'  ; 
+export const delete_CATEGORY_FAILED = 'delete_CATEGORY_FAILED'  ; 
 
 // courses
 
