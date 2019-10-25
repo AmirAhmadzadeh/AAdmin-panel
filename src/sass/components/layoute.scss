@@ -6,10 +6,7 @@
     &__navigation{
          flex: 0 1 25rem ;
          transition: all .2s ease-in ;     
-        //   position: fixed; 
-        //   top: 0; 
-        //   right: 0  ;
-        //   width: 25rem; 
+         
          @include respond(land-tab){
              flex : 0 1 19rem ;
              width: 19rem; 
@@ -22,7 +19,7 @@
          }
 
         &__backDrop{
-            // z-index: ;
+          
             @include respond(port-tab){
                 position: fixed;
                 z-index: 1;
@@ -46,7 +43,7 @@
 
     &__content{
         flex: 1 ;
-        overflow-x: scroll ;      
+          
     }
 }
 
