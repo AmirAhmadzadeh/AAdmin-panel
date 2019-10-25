@@ -22,7 +22,7 @@ const menuTable = (props) => {
                                 onClick={() => alert('hello ')}
                             />
                         </IconButton>
-                        <IconButton className="table__icon" color="secondary" aria-label="Edit">
+                        <IconButton onClick={() => props.deleteMenu(menuItem._id)} className="table__icon" color="secondary" aria-label="Edit">
                             <DeleteIcon />
                         </IconButton>
                     </TableCell>

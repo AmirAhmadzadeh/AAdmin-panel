@@ -6,22 +6,32 @@ import { Tabs, Tab } from '@material-ui/core';
 import CreateMenu from './CreateMenu/CreateMenu';
 import MenuTable from './MenuTable/MenuTable';
 import { connect } from 'react-redux';
-import { fetchmenu } from '../../store/action/';
-import useValue from './../../hooks/useValue';
+import { fetchmenu , makeNewMenu ,deleteMenu } from '../../store/action/';
+import { useValue } from './../../hooks/';
 
 function Menu(props) {
     const [value, setValue] = useValue();
 
+    function handleMakeNewMenu(data) { 
+         props.makeMenu(data) ;   
+         setValue(0)
+    }
+
     useEffect(() => {
         props.loadmenus();
-    })
-
+    },[value])
+    function handleDeleteMenu(id) { 
+        props.deleteMenu(id)
+    }
     function getContent() {
 
         if (value === 0) {
-            return <MenuTable menus={props.menus} />
+         
+            return <MenuTable deleteMenu={handleDeleteMenu} menus={props.menus} />
+        
         }
-        return <CreateMenu menus={props.menus} />
+        
+        return <CreateMenu createNewMenu={handleMakeNewMenu} menus={props.menus} />
 
     }
 
@@ -49,9 +59,14 @@ function Menu(props) {
 
 
 
+
 const mapDispatchToProps = dispatch => {
     return {
-        loadmenus: () => dispatch(fetchmenu())
+        loadmenus: () => dispatch(fetchmenu()) , 
+
+        makeMenu: (data) => dispatch(makeNewMenu(data))   , 
+
+        deleteMenu : (id) => dispatch(deleteMenu(id))
     }
 }
 

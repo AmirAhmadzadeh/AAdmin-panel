@@ -1,112 +1,135 @@
 
 
+import React  from 'react' ; 
+
+import {
+  FormControl,
+  InputLabel,
+  Select, Button,
+  FormGroup
+} from '@material-ui/core';
+
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
+
+import { useInputState, useBoolean, useValue } from './../../../hooks/';
 
 
 
-import React, { Component } from 'react'
-import { FormControl, InputLabel, Select, TextField, Button } from '@material-ui/core';
+function CreateMenu(props) {
 
-class CreateMenu extends Component {
+  const [level, setLevel] = useValue(null);
 
-  state = {
-    selectedMenuItemLevel: null,
-    name: "",
-    link: "",
-    disabledButton: true
+  const [link, setLink] = useInputState('');
+
+  const [name, setName] = useInputState('');
+
+  const [disabledButton, toggle, setDisabledButton] = useBoolean();
+
+
+
+  const handleSubmit = () => {
+
+    props.createNewMenu({ name, link, parent: level });
   }
-  componentDidUpdate = () => {
 
-    if (this.state.name.length > 1 && this.state.link.length > 1 && this.state.disabledButton) {
-      this.setState({
-        disabledButton: false
-      });
-    } 
+  return (
+    <div className="menu__createMenu">
 
+      <ValidatorForm onSubmit={handleSubmit}>
 
-     if (this.state.name.length <= 1 && this.state.link.length <= 1 && !this.state.disabledButton){
-      this.setState({
-        disabledButton: true 
-      });
-    }
+        <FormGroup>
 
-  }
+          <FormControl className="form__controller">
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-  render() {
+            <TextValidator
+              value={name}
 
-    return (
-      <div className="menu__createMenu">
+              label="عنوان منو"
 
+              className="form__controller--inp"
 
+              onChange={(e) => setName(e.target.value)}
 
-        <FormControl className="form__controller">
+              name="name"
 
-          <TextField
-            label="عنوان منو"
-            className="form__controller--inp"
-            onChange={this.handleChange}
-            inputProps={{
-              name: "name"
-            }}
-          />
-        </FormControl>
+              validators={['required']}
 
+              errorMessages={['لطفا چیزی  را بنویسید !']}
+            />
+          </FormControl>
 
+          <FormControl className="form__controller">
 
-        <FormControl className="form__controller">
-          <TextField
-            label="لینک"
-            className="form__controller--inp"
-            onChange={this.handleChange}
-            inputProps={{
-              name: "link"
-            }}
-          />
-        </FormControl>
+            <TextValidator
 
-        <FormControl className="form__controller">
-          <InputLabel htmlFor="age-native-simple" className="form__controller--label">سطح منو</InputLabel>
-          <Select
-            className="form__controller--select"
-            native
-            value={this.selectedMenuItemLevel ? this.state.selectedMenuItemLevel.name : null}
-            onChange={this.handleChange}
+              value={link}
 
-            inputProps={{
-              name: 'selectedMenuItemLevel'
-              // id: 'age-native-simple',
-            }}
-          >
-            <option value={null} className="form__controller--option"> منوی اصلی </option>
-            {
-              this.props.menus ? this.props.menus.map(menuItme => {
-                return <option
-                  value={menuItme}
-                  className="form__controller--option">
-                  {menuItme.name}
-                </option>
-              }) : "Loading..."
-            }
+              label="لینک"
 
-          </Select>
-        </FormControl>
+              className="form__controller--inp"
+
+              onChange={(e) => setLink(e.target.value)}
+
+              name="link"
+
+              validators={['required']}
+
+              errorMessages={['لطفا چیزی  را بنویسید !']}
+
+            />
+          </FormControl>
+
+          <FormControl className="form__controller">
+
+            <InputLabel htmlFor="age-native-simple" className="form__controller--label">سطح منو</InputLabel>
+            <Select
+             
+             className="form__controller--select"
+             
+              native
+             
+              value={level}
+
+              onChange={(e) => setLevel(e.target.value)}
+
+              name="level"
+
+            >
+              <option value='none' className="form__controller--option"> منوی اصلی </option>
+              {
+                props.menus ? props.menus.map(menuItme => {
+                  return <option
+                    value={menuItme._id}
+                    className="form__controller--option">
+                    {menuItme.name}
+                  </option>
+                }) : "Loading..."
+              }
+
+            </Select>
+          </FormControl>
+        </FormGroup>
 
 
-        <FormControl className="form__controller">
-          <Button color="primary" variant="contained" className="form__controller--button" disabled={this.state.disabledButton}>
-            ساختن
-          </Button>
-        </FormControl>
+        <Button
 
-      </div>
-    )
-  }
+          color="primary"
+          variant="contained"
+          className="form__controller--button"
+          type="submit"
+        // disabled={disabledButton}
+        >
+
+          ساختن
+
+              </Button>
+
+
+      </ValidatorForm>
+
+    </div>
+  )
 }
-
 
 
 export default CreateMenu;  
