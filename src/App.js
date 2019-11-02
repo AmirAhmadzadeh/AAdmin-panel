@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
 import Layout from './containers/Layout/Layout';
+import { useSelector ,useDispatch} from 'react-redux' ; 
+import Auth from './containers/Auth/Auth' ; 
 
 
+function app(props) {
+   
 
-
-function App(props) {
-
+  const { auth , error} = useSelector(state => state.auth);
+  
   useEffect(() => {
-    // console.log(`amir is here [ test ]`, localStorage.getItem('accessToken'));
-  }) ; 
+        console.log('amir is here auth is ' , auth)  ; 
+  }, [auth , error]) ; 
   
   function getContent() {
-  
-    if (localStorage.getItem('accessToken'))  return <Layout /> 
-  
-    return  <Layout />
+ 
+    if (auth) return  <Layout/>     
+    return  <Auth />
    
   }
-  console.log(getContent())
+  
   return (
     <div className="app" >
   
@@ -30,4 +32,4 @@ function App(props) {
 
 
 
-export default App;
+export default app;
