@@ -7,7 +7,7 @@ import axios from './../../axios';
 export const fetchmenu = () => {
 
    return dispatch => {
-      axios.get('/menu')
+      axios.get(`/menu?api_token=${localStorage.getItem('token')}`)
          .then(response => {
             dispatch(fetchSuccess(response.data.menus));
          });
@@ -32,7 +32,7 @@ export const makeNewMenu = (data) => {
 
    return dispatch => {
 
-      axios.post('/makeNewMenu', { ...data })
+      axios.post(`/makeNewMenu?api_token=${localStorage.getItem('token')}`, { ...data })
 
          .then(response => {
 
@@ -60,7 +60,7 @@ export const makeNewMenuSuccessed  =  () => ({ type: actions.MAKE_MENU_SUCCESS }
 export const deleteMenu = (id) => {
    return dispatch => {
        
-       axios.delete(`/deleteMenu/${id}`)
+       axios.delete(`/deleteMenu/${id}?api_token=${localStorage.getItem('token')}`)
             .then(response=> {
                    console.log(`heyyyy ${response.data}`) ;
                    

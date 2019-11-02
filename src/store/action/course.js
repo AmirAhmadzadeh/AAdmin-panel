@@ -7,7 +7,7 @@ import axios from './../../axios/';
 export const fetchCourse = () => {
 
     return dispatch => {
-        axios.get('/getCourses')
+        axios.get(`/getCourses?api_token=${localStorage.getItem('token')}`)
             .then(response => {
 
                 dispatch(fetchCourseSuccess(response.data));
@@ -29,7 +29,7 @@ export const createCourse = (data) => {
 
     return dispatch => {
 
-        axios.post('/createCourse', { data })
+        axios.post(`/createCourse?api_token=${localStorage.getItem('token')}`, { data })
 
             .then(response => {
 
@@ -55,7 +55,7 @@ export const deleteCourse = (id) => {
 
     return dispatch => {
 
-        axios.delete(`/deleteCourse/${id}`)
+        axios.delete(`/deleteCourse/${id}?api_token=${localStorage.getItem('token')}`)
 
             .then(response => {
 

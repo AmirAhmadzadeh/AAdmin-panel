@@ -7,7 +7,7 @@ export const fetchComment = (approved) => {
 
             console.log(`hello amir is here in fetch comments `)
             if(approved){
-                axios.get('/getApprovedComments')
+                axios.get(`/getApprovedComments?api_token=${localStorage.getItem('token')}`)
                      .then(response => {
                         dispatch(fetchApprovedCommentSuccess(response.data)) ;      
                      })  
@@ -17,7 +17,7 @@ export const fetchComment = (approved) => {
                      })  ; 
             }else{  
                 // console.log(`amir is here `)
-                axios.get('/getDisApprovedComments')
+                axios.get(`/getDisApprovedComments?api_token=${localStorage.getItem('token')}`)
                 .then(response => {
                     dispatch(fetchDisApprovedCommentSuccess(response.data)) ;  
                 })  

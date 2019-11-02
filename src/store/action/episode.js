@@ -7,7 +7,7 @@ import axios from './../../axios' ;
 export const fetchEpisode  = () => {
    
    return  dispatch => {
-         axios.get('/getEpisodes')
+         axios.get(`/getEpisodes?api_token=${localStorage.getItem('token')}`)
               .then(response =>{
                
                     dispatch(fetchEpisodeSuccess(response.data))  ;  

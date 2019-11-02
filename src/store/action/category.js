@@ -11,7 +11,7 @@ export const fetchCategory = () => {
 
    return  dispatch => {
        
-         axios.get('/getCats')
+         axios.get(`/getCats?api_token=${localStorage.getItem('token')}`)
               .then(response =>{
                     // console.log(`amir is here ` , response.data)
                     dispatch(fetchCategorySuccess(response.data))  ;  
@@ -37,7 +37,7 @@ export const fetchCategorySuccess = (data) => {
 
 export const makeNewCat = (data) => {
     return dispatch => {
-        axios.post('/makeNewCat' , {...data})
+        axios.post(`/makeNewCat?api_token=${localStorage.getItem('token')}` , {...data})
              .then(response=> {
                     console.log(`heyyyy ${response.data}`) ;
                     
@@ -59,7 +59,7 @@ export const makeNewCatSuccessed = () =>  ( { type:actions.MAKE_CATEGORY_SUCCESS
 export const deleteCat = (id) => {
     return dispatch => {
         
-        axios.delete(`/deleteCat/${id}`)
+        axios.delete(`/deleteCat/${id}?api_token=${localStorage.getItem('token')}`)
              .then(response=> {
                     console.log(`heyyyy ${response.data}`) ;
                     

@@ -29,3 +29,9 @@ export {
 export {
     fetchEpisode
 } from './episode' ; 
+
+
+
+export {
+    login
+} from './auth' ; 
