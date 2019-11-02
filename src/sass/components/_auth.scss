@@ -1,0 +1,16 @@
+
+
+.auth{ 
+    font-size: 1.75rem ; 
+    position: absolute; 
+    top:45% ; 
+    right: 50% ; 
+    transform: translate(50%,-50%);
+    input,button{ 
+        font-size:1.75rem ;   
+    }
+
+    &_heading{ 
+        text-align: center; 
+    }
+}
