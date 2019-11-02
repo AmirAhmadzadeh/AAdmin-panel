@@ -5,7 +5,7 @@
 .navigation{
 
     @include respond(from-port){ 
-        width: 17%;
+        width: 15%;
         position: fixed;
     }
     height: 100vh ;

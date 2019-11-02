@@ -15,7 +15,7 @@ const ApprovedCommnts = (props) => {
             return (
                 <TableRow key={commentItem._id}>
                     <TableCell className="table__cell" align="right"> {commentItem.user.email} </TableCell>
-                    <TableCell className="table__cell" align="right">{commentItem.course.slug}</TableCell>
+                    {/* <TableCell className="table__cell" align="right">{commentItem.course.slug}</TableCell> */}
                     <TableCell className="table__cell" align="right">{commentItem.comment}</TableCell>
 
                     <TableCell className="table__cell" align="right">
