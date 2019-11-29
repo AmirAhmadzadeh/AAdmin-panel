@@ -1,84 +1,60 @@
-
-
-import React, { useEffect } from 'react'
-
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
-  
   Button,
-  
-  FormGroup, 
-  
-  TextField,
-  
+  FormGroup,
   FormControl,
-  
   Select,
-  
   Input,
-  
   MenuItem,
-  
   Checkbox,
-  
-  ListItemText,
-  
-  InputLabel
-
-} from '@material-ui/core';
-
-
-import { useArrayValueState, useBoolean, useFilePicker, useInputState, useValue } from './../../../hooks/'
-
+  ListItemText
+} from '@material-ui/core'; 
+import { useFilePicker, useValue } from './../../../hooks/';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-
-
+import Editor from '../../../components/Editor/Editor';
+import {
+  titleChanged, priceChanged,
+  slugChanged, tagChanged,
+  setKindCourse, setCategories,
+  setReqPremission
+} from '../../../store/action/index';
 
 export default function ({ makeNewCourse, cats }) {
 
-  const [title, setTitle] = useInputState('');
-
-  const [price, setPrice] = useValue(null);
-
-  const [slug, setSlug] = useInputState('');
-
-  const [tag, setTag] = useInputState('');
-
-  const [kindOfCourse, setKindOfCourse] = useValue('free');
-
-  const [categories, setCategories] = useArrayValueState([]);
 
   const [courseImage, setImage] = useFilePicker(null);
-
-  const [canSendReq, toggleCanUse, setCanSendReq] = useBoolean(false);
-
   const [errorMsg, setErrorMsg] = useValue(null);
 
-  const [courseText, setCourseText] = useInputState('');
-
+  const state = useSelector(state => state.createCourse)
+  const dispatch = useDispatch();
 
 
   function handleSubmit() {
 
-    if (canSendReq) {
+    if (state.canSendReq) {
       setErrorMsg(null);
-      
+
 
       const data = {
-        slug, categories,
-        title, type: kindOfCourse,
-        body: courseText,
-        price, tags: tag,
+        slug: state.slug,
+        categories: state.categories,
+        title: state.title,
+        type: state.kindOfCourse,
+        body: state.courseText,
+        price: state.price,
+        tags: state.tag,
         file: courseImage
       }
-      
+
       makeNewCourse(data);
 
     } else {
-      setErrorMsg('Error In Creating Course Please Check youre Inputs');
+      setErrorMsg('لطفا ورودی های خود را کنترل کنید !!!');
     }
-  
+
   }
- 
+
 
 
 
@@ -91,16 +67,19 @@ export default function ({ makeNewCourse, cats }) {
       return false
     });
 
-    if (categories.length === 0 || courseImage === null) setCanSendReq(false);
-    else if (categories.length !== 0 && courseImage) setCanSendReq(true);
+    if (state.categories.length === 0 || courseImage === null) dispatch(setReqPremission(false));
+    else if (state.categories.length !== 0 && courseImage) dispatch(setReqPremission(true));
 
 
-  });
+  }, [state.price , state.categories , courseImage]);
+
 
   return (
     <React.Fragment>
 
       <h1> {errorMsg ? errorMsg : null} </h1>
+
+
       <ValidatorForm onSubmit={handleSubmit}>
 
         <FormGroup>
@@ -108,11 +87,11 @@ export default function ({ makeNewCourse, cats }) {
             <TextValidator
               label="عنوان دوره"
               className="form__controller--inp"
-              onChange={e => { setTitle(e.target.value) }}
+              onChange={e => { dispatch(titleChanged(e.target.value)) }}
               name="title"
               validators={['required']}
               errorMessages={['لطفا چیزی  را بنویسید !']}
-              value={title}
+              value={state.title}
               fullWidth
               margin="normal"
               variant="filled"
@@ -128,10 +107,10 @@ export default function ({ makeNewCourse, cats }) {
         <FormControl className="form__controller">
 
           <TextValidator
-            value={price}
+            value={state.price}
             label="قیمت دوره"
             className="form__controller--inp"
-            onChange={(e) => { setPrice(e.target.value) }}
+            onChange={(e) => { dispatch(priceChanged(e.target.value)) }}
             name="price"
             validators={['required', 'isNum']}
             errorMessages={['لطفا چیزی  را بنویسید !', 'لطفا رقم مبغ دوره را وارد کنید ']}
@@ -149,10 +128,10 @@ export default function ({ makeNewCourse, cats }) {
         <FormControl className="form__controller">
 
           <TextValidator
-            value={slug}
+            value={state.slug}
             label="اسلاگ دوره"
             className="form__controller--inp"
-            onChange={(e) => { setSlug(e.target.value) }}
+            onChange={(e) => { dispatch(slugChanged(e.target.value)) }}
             validators={['required']}
             errorMessages={['لطفا چیزی  را بنویسید !']}
             name='slug'
@@ -174,8 +153,8 @@ export default function ({ makeNewCourse, cats }) {
             label="تگ های دوره"
             className="form__controller--inp"
             name='tag'
-            value={tag}
-            onChange={e => { setTag(e.target.value) }}
+            value={state.tag}
+            onChange={e => { dispatch(tagChanged(e.target.value)) }}
             validators={['required']}
             errorMessages={['لطفا چیزی  را بنویسید !']}
             margin="normal"
@@ -193,12 +172,12 @@ export default function ({ makeNewCourse, cats }) {
             <label className="form__controller--label">
               نوع
               دوره
-            </label>
+                </label>
             <Select
               className="form__controller--select"
               native
-              value={kindOfCourse}
-              onChange={(e) => { setKindOfCourse(e.target.value); }}
+              value={state.kindOfCourse}
+              onChange={(e) => { dispatch(setKindCourse(e.target.value)); }}
 
               inputProps={{
                 name: 'selectedKindOfCourse'
@@ -218,11 +197,11 @@ export default function ({ makeNewCourse, cats }) {
           <FormControl variant="filled" className="form__controller" style={{}}>
             <label className="form__controller--label">
               دسته ها
-            </label>
+                </label>
             <Select
               multiple
-              value={categories}
-              onChange={(e) => setCategories(e.target.value)}
+              value={state.categories}
+              onChange={(e) => dispatch(setCategories(e.target.value))}
               input={<Input id="select-multiple-checkbox" />}
               renderValue={selected => selected.join(', ')}
 
@@ -230,7 +209,7 @@ export default function ({ makeNewCourse, cats }) {
               {
                 cats ? cats.map(catItem => (
                   <MenuItem key={catItem.name} value={catItem._id}>
-                    <Checkbox checked={categories.indexOf(catItem._id) > -1} />
+                    <Checkbox checked={state.categories.indexOf(catItem._id) > -1} />
                     <ListItemText primary={catItem.name} />
                   </MenuItem>
                 )) : null
@@ -244,7 +223,7 @@ export default function ({ makeNewCourse, cats }) {
 
           <label className="form__controller--label">
             تصویر دوره
-            </label>
+                </label>
 
           <Input
             // value={courseImage}
@@ -263,20 +242,25 @@ export default function ({ makeNewCourse, cats }) {
           <label className="form__controller--label"> متن دوره </label>
 
 
-          <TextValidator
-            multiline
-            name="courseText"
-            onChange={(e) => { setCourseText(e.target.value) }}
-            validators={['required']}
-            errorMessages={['لطفا چیزی  را بنویسید !']}
-            value={courseText}
-            validators={['required']}
-            errorMessages={['لطفا چیزی  را بنویسید !']}
-          />
+          {/* <TextValidator
+                multiline
+                name="courseText"
+                onChange={(e) => { setCourseText(e.target.value) }}
+                validators={['required']}
+                errorMessages={['لطفا چیزی  را بنویسید !']}
+                value={courseText}
+                validators={['required']}
+                errorMessages={['لطفا چیزی  را بنویسید !']}
+              /> */}
+          <Editor
 
+          />
         </FormGroup>
+
+
+
         <Button
-          disabled={!canSendReq}
+          disabled={!state.canSendReq}
           type="submit"
           color="primary"
           variant="contained"
@@ -288,12 +272,3 @@ export default function ({ makeNewCourse, cats }) {
     </React.Fragment>
   )
 }
-
-
-
-
-
-
-
-
-
