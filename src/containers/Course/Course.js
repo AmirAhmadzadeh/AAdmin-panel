@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react'
-
 import { Tabs, Tab } from '@material-ui/core';
-
 import CreateCourse from './CreateCourse/CreateCourse';
-
 import CourseTable from './CourseTable/CourseTable';
-
 import { connect } from 'react-redux';
-
 import { fetchCourse, fetchCategory, createCourse , deleteCourse } from '../../store/action/';
-
 import {useValue} from './../../hooks/';
 
 

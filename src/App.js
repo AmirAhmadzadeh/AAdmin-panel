@@ -17,7 +17,7 @@ function app(props) {
  
     if (auth) return  <Layout/>     
     return  <Auth />
-   
+     // cahnge it after development 
   }
   
   return (
