@@ -35,3 +35,15 @@ export {
 export {
     login
 } from './auth' ; 
+
+
+export {
+    titleChanged,
+    priceChanged , 
+    slugChanged , 
+    tagChanged,
+    setKindCourse , 
+    setCategories , 
+    changeContent , 
+    setReqPremission
+ } from './createCourse' ; 
