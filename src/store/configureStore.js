@@ -5,7 +5,8 @@ import rThunk from 'redux-thunk' ;
 import menuReducer  from './reducers/menu' ; 
 import commentReducer from './reducers/comment' ;  
 import categoryReducer from './reducers/category' ;  
-import courseReducer from './reducers/course'  ;
+import courseReducer from './reducers/course/course'  ;
+import createCourseReducer from './reducers/course/createCourse' ;
 import episodeReducer from './reducers/episode' ;  
 import authReducer from './reducers/auth' ; 
 
@@ -15,6 +16,7 @@ const reducer =  combineReducers({
     comments : commentReducer  , 
     cats : categoryReducer  , 
     course : courseReducer , 
+    createCourse : createCourseReducer , 
     episode : episodeReducer     
 }) ; 
 

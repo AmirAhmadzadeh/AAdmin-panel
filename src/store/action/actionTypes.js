@@ -1,3 +1,4 @@
+import { EOPNOTSUPP } from "constants";
 
 // menu 
 export const FETCH_MENUS = 'FETCH_MENUS'  ; 
@@ -42,6 +43,15 @@ export const FETCH_COURSES = 'FETCH_COURSES'  ;
 export const FETCH_COURSES_SUCCESS = 'FETCH_COURSES_SUCCESS'  ; 
 export const FETCH_COURSES_FAILED = 'FETCH_COURSES_FAILED'  ; 
 
+// createCourse
+export const TITLE_CHANGED = 'TITLE_CHANGED' ;  
+export const PRICE_CHANGED = 'PRICE_CHANGED' ;  
+export const TAG_CHANGED =  'TAG_CHANGED' ;  
+export const SLUG_CHANGED = 'SLUG_CHANGED' ; 
+export const SET_KINDOFCOURSE  = 'SET_KINDOFCOURSE' ; 
+export const SET_CATEGORIES =  'SET_CATEGORIES' ;  
+export const COURSE_TEXT_CHANGED = 'COURSE_TEXT_CHANGED' ; 
+export const PREMISSION_SEND_REQ = 'PREMISSION_SEND_REQ' ;
 //creating course action types 
 export const CREATE_COURSE = 'CREATE_COURSE'  ; 
 export const CREATE_COURSE_SUCCESS = 'CREATE_COURSE_SUCCESS'  ; 
@@ -50,7 +60,7 @@ export const CREATE_COURSE_FAILED = 'CREATE_COURSE_FAILED'  ;
 export const DELETE_COURSE = 'DELETE_COURSE' ; 
 export const DELETE_COURSE_FAILED = 'DELETE_COURSE_FAILED' ; 
 export const DELETE_COURSE_SUCCESS = 'DELETE_COURSE_SUCCESS' ; 
-
+ 
 //Epsiodes
 
 export const FETCH_EPISODE = 'FETCH_EPISODE'  ; 
