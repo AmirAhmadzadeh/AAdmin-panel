@@ -38,7 +38,7 @@ export const createCourse = (data) => {
                 if (response.data.status) {
 
                     dispatch(courseCreatedSuccessFully(response.data))
-                    
+                    dispatch(createCourseInit()) ;  
                 }
             })
             .catch(err => {
@@ -48,7 +48,7 @@ export const createCourse = (data) => {
 }
 
 export const courseCreatedSuccessFully = () => ({ status: true, type: actions.CREATE_COURSE_SUCCESS });
-
+export const createCourseInit = () => ({  type: actions.CREATE_COURSE_INIT });
 
 
 export const deleteCourse = (id) => {
