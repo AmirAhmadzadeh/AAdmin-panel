@@ -9,7 +9,7 @@ import {
   MenuItem,
   Checkbox,
   ListItemText
-} from '@material-ui/core'; 
+} from '@material-ui/core';
 import { useFilePicker, useValue } from './../../../hooks/';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import Editor from '../../../components/Editor/Editor';
@@ -17,13 +17,12 @@ import {
   titleChanged, priceChanged,
   slugChanged, tagChanged,
   setKindCourse, setCategories,
-  setReqPremission
+  setReqPremission , courseImageChanged
 } from '../../../store/action/index';
 
-export default function ({ makeNewCourse, cats }) {
+export default function ({ makeNewCourse, cats , resetCreatePage }) {
 
 
-  const [courseImage, setImage] = useFilePicker(null);
   const [errorMsg, setErrorMsg] = useValue(null);
 
   const state = useSelector(state => state.createCourse)
@@ -32,7 +31,7 @@ export default function ({ makeNewCourse, cats }) {
 
   function handleSubmit() {
 
-    if (state.canSendReq) {
+    // if (state.canSendReq) {
       setErrorMsg(null);
 
 
@@ -44,14 +43,14 @@ export default function ({ makeNewCourse, cats }) {
         body: state.courseText,
         price: state.price,
         tags: state.tag,
-        file: courseImage
+        file: state.courseImage
       }
-
       makeNewCourse(data);
+      resetCreatePage() ;  
 
-    } else {
-      setErrorMsg('لطفا ورودی های خود را کنترل کنید !!!');
-    }
+    // } else {
+      // setErrorMsg('لطفا ورودی های خود را کنترل کنید !!!');
+    // }
 
   }
 
@@ -67,11 +66,11 @@ export default function ({ makeNewCourse, cats }) {
       return false
     });
 
-    if (state.categories.length === 0 || courseImage === null) dispatch(setReqPremission(false));
-    else if (state.categories.length !== 0 && courseImage) dispatch(setReqPremission(true));
+    // if (state.categories.length === 0) dispatch(setReqPremission(false));
+    // else if (state.categories.length !== 0 && courseImage) dispatch(setReqPremission(true));
 
 
-  }, [state.price , state.categories , courseImage]);
+  });
 
 
   return (
@@ -222,18 +221,24 @@ export default function ({ makeNewCourse, cats }) {
         <FormGroup>
 
           <label className="form__controller--label">
-            تصویر دوره
+            لینک تصویر دوره
                 </label>
 
-          <Input
-            // value={courseImage}
-            type="file"
-            name="file"
-            onChange={(e) => {
-              // console.log(e.target.files[0]) ; 
-              setImage(e.target.files[0])
-            }}
-            variant="filled"
+          <TextValidator
+              // label="تگ های دوره"
+              className="form__controller--inp"
+              name='file'
+              value={state.courseImage}
+              onChange={e => { dispatch(courseImageChanged(e.target.value)) }}
+              validators={['required']}
+              errorMessages={['لطفا چیزی  را بنویسید !']}
+              margin="normal"
+              variant="filled"
+              // placeholder="لطفا اسلاگ دوره را وارد کنید!"
+              helperText="Full width!"
+              InputLabelProps={{
+                shrink: true,
+              }}
 
           />
         </FormGroup>
@@ -260,7 +265,7 @@ export default function ({ makeNewCourse, cats }) {
 
 
         <Button
-          disabled={!state.canSendReq}
+          // disabled={!state.canSendReq}
           type="submit"
           color="primary"
           variant="contained"
