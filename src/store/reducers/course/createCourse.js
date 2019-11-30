@@ -12,7 +12,7 @@ const initState = {
     tag: "",
     kindOfCourse: "free",
     categories: [],
-    courseImage: null,
+    courseImage: "",
     canSendReq: false,
     errorMsg: '',
     courseText: ''
@@ -63,7 +63,18 @@ const courseReducer = (state = initState, action) => {
             return { 
                 ...state  , 
                 canSendReq : action.value 
-            };      
+            };  
+            
+        case actionTypes.COURSE_IMAGE_CHANGED : 
+          return { 
+              ...state  , 
+              courseImage : action.value  
+          } 
+          
+        case actionTypes.CREATE_COURSE_INIT : 
+           return { 
+               ...initState
+           }        
         default:
             return {
                 ...state

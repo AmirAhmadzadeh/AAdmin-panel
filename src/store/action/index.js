@@ -23,6 +23,7 @@ export {
     fetchCourse , 
     createCourse , 
     deleteCourse 
+    , createCourseInit 
 } from './course' ; 
 
 
@@ -45,5 +46,6 @@ export {
     setKindCourse , 
     setCategories , 
     changeContent , 
-    setReqPremission
+    setReqPremission, 
+    courseImageChanged 
  } from './createCourse' ; 
