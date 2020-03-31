@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import {
     Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton
@@ -19,7 +17,7 @@ const menuTable = (props) => {
                     <TableCell className="table__cell" align="right">
                         <IconButton className="table__icon" color="primary" aria-label="Edit">
                             <EditIcon
-                                onClick={() => alert('hello ')}
+                                onClick={() => console.log('amir si here')}
                             />
                         </IconButton>
                         <IconButton onClick={() => props.deleteMenu(menuItem._id)} className="table__icon" color="secondary" aria-label="Edit">
@@ -30,7 +28,7 @@ const menuTable = (props) => {
             );
         });
     } else {
-        menuItems = "Loading..." ;
+        menuItems = "Loading...";
     }
     return (
         <Paper >
@@ -43,7 +41,7 @@ const menuTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                       {menuItems} 
+                    {menuItems}
                 </TableBody>
             </Table>
         </Paper>

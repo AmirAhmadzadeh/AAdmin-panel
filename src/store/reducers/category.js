@@ -1,29 +1,37 @@
-import * as actionTypes from './../action/actionTypes' ;
- 
+import * as actionTypes from './../action/actionTypes';
+
 
 const initState = {
-    categories : null 
-} 
+    categories: null,
+    edited: false
+}
 
 
 
-const categoryReducer = (state = initState , action ) => {
+const categoryReducer = (state = initState, action) => {
 
-    switch (action.type) { 
-      
+    switch (action.type) {
+
         case actionTypes.FETCH_CATEGORY_SUCCESS: {
             return {
-                ...state  , 
-                categories : action.data  
+                ...state,
+                edited: false,
+                categories: action.data
             }
         }
-        default :
-         return {
-            ...state 
+        case actionTypes.EDIT_CATEGORY_SUCCESS: {
+            return {
+                ...state,
+                edited: true
+            }
         }
+        default:
+            return {
+                ...state
+            }
     }
 
-} 
+}
 
 
-export default categoryReducer  ;  
+export default categoryReducer;  

@@ -2,62 +2,64 @@
 
 
 export {
-   fetchmenu , 
-    makeNewMenu , 
+    fetchmenu,
+    makeNewMenu,
     deleteMenu
-} from './menu' ; 
+} from './menu';
 
 export {
     fetchComment
-} from './comments' ; 
+} from './comments';
 
 
 export {
-    fetchCategory , 
-    makeNewCat , 
-    deleteCat
-} from './category' ; 
+    fetchCategory,
+    makeNewCat,
+    deleteCat,
+    editCategory
+
+} from './category';
 
 
 export {
-    fetchCourse , 
-    createCourse , 
-    deleteCourse 
-    , createCourseInit 
-} from './course' ; 
+    fetchCourse,
+    createCourse,
+    deleteCourse
+    , createCourseInit
+} from './course';
 export {
     titleChanged,
-    priceChanged , 
-    slugChanged , 
+    priceChanged,
+    slugChanged,
     tagChanged,
-    setKindCourse , 
-    setCategories , 
-    changeContent , 
-    setReqPremission, 
-    courseImageChanged 
- } from './createCourse' ;
+    setKindCourse,
+    setCategories,
+    changeContent,
+    setReqPremission,
+    courseImageChanged
+} from './createCourse';
 
 export {
-    fetchEpisode , 
-    resetEpisodeCreatePage, 
+    fetchEpisode,
+    resetEpisodeCreatePage,
     makeNewEpisode
-} from './episode' ; 
+} from './episode';
 
 export {
     titleChangedEpisode,
-    setKindEpisode , 
-        
-    changeContentEpisode , 
+    setKindEpisode,
+
+    changeContentEpisode,
     // setReqPremission, 
-    setVideoLink , 
-    setNumberVideo , 
+    setVideoLink,
+    setNumberVideo,
     changeTimeVideo,
     setRelaventCourse
- } from './CreateEpisode' ;
+} from './CreateEpisode';
 
 export {
     login
-} from './auth' ; 
+} from './auth';
 
 
- 
+

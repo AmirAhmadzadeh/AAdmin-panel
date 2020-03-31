@@ -1,33 +1,32 @@
 import React, { useEffect } from 'react';
 import Layout from './containers/Layout/Layout';
-import { useSelector ,useDispatch} from 'react-redux' ; 
-import Auth from './containers/Auth/Auth' ; 
+import { useSelector, useDispatch } from 'react-redux';
+import Auth from './containers/Auth/Auth';
 
 
 function app(props) {
-   
 
-  const { auth , error} = useSelector(state => state.auth);
-  
+
+  const { auth, error } = useSelector(state => state.auth);
+
   useEffect(() => {
-        console.log('amir is here auth is ' , auth)  ; 
-  }, [auth , error]) ; 
-  
+    console.log('amir is here auth is ', auth);
+  }, [auth, error]);
+
   function getContent() {
- 
-    if (auth) return  <Layout/>     
-     return  <Auth />
-    // return <Layout/>
-   }
-  
+
+    if (auth) return <Layout />
+    return <Auth />
+  }
+
   return (
     <div className="app" >
-  
+
       {getContent()}
-  
+
     </div>
-  
-  ) ; 
+
+  );
 }
 
 

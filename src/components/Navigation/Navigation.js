@@ -8,16 +8,12 @@ import Icon from '../Icons/Icons';
 const navigation = (props) => {
     return (
         <Aux>
-
             <nav className="navigation">
                 <div className="navigation__brand">
                     <BrandIcon className="navigation__brand--icon" />
                     <h1 className="navigation__brand--name"> پنل مدیریت  </h1>
                 </div>
-
                 <ul className="navigation__list">
-
-
                     <li className="navigation__item">
                         <NavLink
                             to="/"
@@ -26,11 +22,9 @@ const navigation = (props) => {
                             onClick={props.navItemClicked}
                             activeClassName="navigation__active"
                         >
-
                             <Icon IconName="dashbord" classes="navigation__link--icon" />
                             داشبورد
                 </NavLink>
-
                     </li>
                     <li className="navigation__item">
                         <NavLink
@@ -38,15 +32,11 @@ const navigation = (props) => {
                             className="navigation__link"
                             activeClassName="navigation__active"
                             onClick={props.navItemClicked}
-
                         >
                             <Icon IconName="posts" classes="navigation__link--icon" />
-
                             پست ها
                 </NavLink>
-
                     </li>
-
                     <li className="navigation__item">
                         <NavLink
                             to="/courses"
@@ -78,9 +68,7 @@ const navigation = (props) => {
                             to="/category"
                             activeClassName="navigation__active"
                             onClick={props.navItemClicked}
-
                         >
-
                             <Icon IconName="category" classes="navigation__link--icon" />
                             دسته ها
                         </NavLink>
@@ -91,7 +79,6 @@ const navigation = (props) => {
                             to="/menu"
                             activeClassName="navigation__active"
                             onClick={props.navItemClicked}
-
                         >
                             <Icon IconName="menus" classes="navigation__link--icon" />
                             منوها
@@ -105,7 +92,7 @@ const navigation = (props) => {
                             onClick={props.navItemClicked}
                         >
                             <Icon IconName="comments" classes="navigation__link--icon" />
-                                       کامنت ها
+                            کامنت ها
                         </NavLink>
                     </li>
                     <li className="navigation__item">
@@ -117,7 +104,20 @@ const navigation = (props) => {
 
                         >
                             <Icon IconName="users" classes="navigation__link--icon" />
-                                              کاربران
+                            کاربران
+                        </NavLink>
+                    </li>
+
+                    <li className="navigation__item">
+                        <NavLink
+                            className="navigation__link"
+                            to="/trello"
+                            activeClassName="navigation__active"
+                            onClick={props.navItemClicked}
+
+                        >
+                            <Icon IconName="users" classes="navigation__link--icon" />
+                            ترلو
                         </NavLink>
                     </li>
                 </ul>
