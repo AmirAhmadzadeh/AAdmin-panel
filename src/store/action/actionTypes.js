@@ -1,14 +1,40 @@
+// POSTS 
 
+// FETCH POSTS 
+export const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
+export const FETCH_POSTS_FAILED = 'FETCH_POSTS_FAILED';
+
+// create POST 
+export const POST_TITLE_CHANGED = 'POST_TITLE_CHANGED';
+export const TAG_CHANGED_POST = 'TAG_CHANGED_POST';
+export const SLUG_CHANGED_POST = 'SLUG_CHANGED_POST';
+export const SET_CATEGORIES_POST = 'SET_CATEGORIES_POST';
+export const POST_TEXT_CHANGED = 'POST_TEXT_CHANGED';
+export const PREMISSION_SEND_REQ_POST = 'PREMISSION_SEND_REQ_POST';
+export const POST_IMAGE_CHANGED = 'POST_IMAGE_CHANGED';
+export const CREATE_POST_INIT = "CREATE_POST_INIT";
+
+
+//CREATE POST action types 
+export const CREATE_POST = 'CREATE_POST';
+export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
+export const CREATE_POST_FAILED = 'CREATE_POST_FAILED';
+
+//DELETE POST
+export const DELETE_POST = 'DELETE_COURSE';
+export const DELETE_POST_FAILED = 'DELETE_POST_FAILED';
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
 
 // menu 
 export const FETCH_MENUS = 'FETCH_MENUS';
 export const FETCH_MENUS_SUCCESS = 'FETCH_MENUS_SUCCESS';
 export const FETCH_MENUS_FAILED = 'FETCH_MENUS_FAILED';
-
+//creating menus 
 export const MAKE_MENU = 'MAKE_MENU';
 export const MAKE_MENU_SUCCESS = 'MAKE_MENU_SUCCESS';
 export const MAKE_MENU_FAILED = 'MAKE_MENU_FAILED';
-
+//deleting menus 
 export const delete_MENU = 'delete_MENU';
 export const delete_MENU_FAILED = 'delete_MENU_FAILED';
 export const delete_MENU_SUCCESS = 'delete_MENU_SUCCESS';
@@ -18,7 +44,6 @@ export const delete_MENU_SUCCESS = 'delete_MENU_SUCCESS';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const FETCH_APPROVED_COMMENTS_SUCCESS = 'FETCH_APPROVED_COMMENTS_SUCCESS';
 export const FETCH_DISAPPROVED_COMMENTS_SUCCESS = 'FETCH_DISAPPROVED_COMMENTS_SUCCESS';
-
 export const FETCH_COMMENTS_FAILED = 'FETCH_COMMENTS_FAILED';
 
 
@@ -38,6 +63,9 @@ export const delete_CATEGORY_SUCCESS = 'delete_CATEGORY_SUCCESS';
 export const delete_CATEGORY_FAILED = 'delete_CATEGORY_FAILED';
 
 export const EDIT_CATEGORY_SUCCESS = 'EDIT_CATEGORY_SUCCESS';
+
+
+
 // courses ; 
 //fetchcurses ; 
 export const FETCH_COURSES = 'FETCH_COURSES';
@@ -61,7 +89,7 @@ export const CREATE_COURSE_INIT = "CREATE_COURSE_INIT";
 export const CREATE_COURSE = 'CREATE_COURSE';
 export const CREATE_COURSE_SUCCESS = 'CREATE_COURSE_SUCCESS';
 export const CREATE_COURSE_FAILED = 'CREATE_COURSE_FAILED';
-//delete post 
+//delete Course  
 export const DELETE_COURSE = 'DELETE_COURSE';
 export const DELETE_COURSE_FAILED = 'DELETE_COURSE_FAILED';
 export const DELETE_COURSE_SUCCESS = 'DELETE_COURSE_SUCCESS';

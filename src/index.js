@@ -20,7 +20,7 @@ const AdminPanel = () => {
 
 const store = configureStore();
 ReactDOM.render(
-    <AdminPanel />
+  <AdminPanel />
   , document.getElementById('root'));
 
 

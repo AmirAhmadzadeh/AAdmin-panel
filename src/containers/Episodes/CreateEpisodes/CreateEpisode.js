@@ -40,7 +40,8 @@ import EpisodeEditor from '../../../components/Editor/EpisodeEditor';
 export default function CreateEpisode(props) {
 
 
-  const state = useSelector(state => state.createEpisode)
+  const state = useSelector(state => state.createEpisode);
+
   const dispatch = useDispatch();
   function handleSubmit() {
     const data = {
@@ -55,8 +56,8 @@ export default function CreateEpisode(props) {
     }
 
     dispatch(makeNewEpisode(data));
-    dispatch(resetEpisodeCreatePage()) ;
-    props.gotoTable() ;
+    dispatch(resetEpisodeCreatePage());
+    props.gotoTable();
   }
   return (
     <React.Fragment>
