@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Tab, Tabs } from '@material-ui/core';
 import {
-  fetchPosts, fetchCategory,
-  createPost, createPostInit,
+  fetchCategory, createPost, createPostInit,
 } from '../../store/action/';
 import CreatePost from './CreatePost';
 import PostTable from './PostTable';

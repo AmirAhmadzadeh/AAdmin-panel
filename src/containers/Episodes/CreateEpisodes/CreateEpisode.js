@@ -1,27 +1,15 @@
-
-//add validation 
-
-
-
-
-import React, { useEffect } from 'react';
-
+import React from 'react';
 import {
   Button,
   FormGroup,
   TextField,
   FormControl,
   Select
-
 } from '@material-ui/core';
-
-import { useInputState } from './../../../hooks';
-
 import {
   useSelector,
   useDispatch
 } from 'react-redux';
-
 import {
   setRelaventCourse,
   setKindEpisode,
@@ -32,20 +20,14 @@ import {
   makeNewEpisode,
   resetEpisodeCreatePage
 } from './../../../store/action/index';
-
 import EpisodeEditor from '../../../components/Editor/EpisodeEditor';
-
-
-
 export default function CreateEpisode(props) {
 
-
   const state = useSelector(state => state.createEpisode);
-
   const dispatch = useDispatch();
+
   function handleSubmit() {
     const data = {
-
       title: state.title,
       time: state.time,
       number: state.number,
@@ -54,14 +36,13 @@ export default function CreateEpisode(props) {
       body: state.EpisodeText,
       type: state.selectedKindOfEpisode,
     }
-
     dispatch(makeNewEpisode(data));
     dispatch(resetEpisodeCreatePage());
     props.gotoTable();
   }
+
   return (
     <React.Fragment>
-
       <FormControl className="form__controller">
         <TextField
           label="عنوان ویدیو"
@@ -91,10 +72,6 @@ export default function CreateEpisode(props) {
           }}
         />
       </FormControl>
-
-
-
-
       <FormGroup>
         <FormControl className="form__controller">
           <TextField
@@ -173,7 +150,6 @@ export default function CreateEpisode(props) {
         }}
         onClick={handleSubmit}> ساختن
         </Button>
-
     </React.Fragment>
   )
 }

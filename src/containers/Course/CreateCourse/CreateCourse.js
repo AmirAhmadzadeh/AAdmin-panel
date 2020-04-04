@@ -10,17 +10,17 @@ import {
   Checkbox,
   ListItemText
 } from '@material-ui/core';
-import { useFilePicker, useValue } from './../../../hooks/';
+import { useValue } from './../../../hooks/';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import Editor from '../../../components/Editor/Editor';
 import {
   titleChanged, priceChanged,
   slugChanged, tagChanged,
   setKindCourse, setCategories,
-  setReqPremission , courseImageChanged
+  courseImageChanged
 } from '../../../store/action/index';
 
-export default function ({ makeNewCourse, cats , resetCreatePage }) {
+export default function ({ makeNewCourse, cats, resetCreatePage }) {
 
 
   const [errorMsg, setErrorMsg] = useValue(null);
@@ -32,24 +32,24 @@ export default function ({ makeNewCourse, cats , resetCreatePage }) {
   function handleSubmit() {
 
     // if (state.canSendReq) {
-      setErrorMsg(null);
+    setErrorMsg(null);
 
 
-      const data = {
-        slug: state.slug,
-        categories: state.categories,
-        title: state.title,
-        type: state.kindOfCourse,
-        body: state.courseText,
-        price: state.price,
-        tags: state.tag,
-        file: state.courseImage
-      }
-      makeNewCourse(data);
-      resetCreatePage() ;  
+    const data = {
+      slug: state.slug,
+      categories: state.categories,
+      title: state.title,
+      type: state.kindOfCourse,
+      body: state.courseText,
+      price: state.price,
+      tags: state.tag,
+      file: state.courseImage
+    }
+    makeNewCourse(data);
+    resetCreatePage();
 
     // } else {
-      // setErrorMsg('لطفا ورودی های خود را کنترل کنید !!!');
+    // setErrorMsg('لطفا ورودی های خود را کنترل کنید !!!');
     // }
 
   }
@@ -225,20 +225,20 @@ export default function ({ makeNewCourse, cats , resetCreatePage }) {
                 </label>
 
           <TextValidator
-              // label="تگ های دوره"
-              className="form__controller--inp"
-              name='file'
-              value={state.courseImage}
-              onChange={e => { dispatch(courseImageChanged(e.target.value)) }}
-              validators={['required']}
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-              margin="normal"
-              variant="filled"
-              // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-              helperText="Full width!"
-              InputLabelProps={{
-                shrink: true,
-              }}
+            // label="تگ های دوره"
+            className="form__controller--inp"
+            name='file'
+            value={state.courseImage}
+            onChange={e => { dispatch(courseImageChanged(e.target.value)) }}
+            validators={['required']}
+            errorMessages={['لطفا چیزی  را بنویسید !']}
+            margin="normal"
+            variant="filled"
+            // placeholder="لطفا اسلاگ دوره را وارد کنید!"
+            helperText="Full width!"
+            InputLabelProps={{
+              shrink: true,
+            }}
 
           />
         </FormGroup>

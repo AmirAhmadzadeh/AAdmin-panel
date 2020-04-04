@@ -2,20 +2,15 @@ import { NavLink } from 'react-router-dom';
 import BrandIcon from './../../components/Icons/BrandIcon';
 import React from 'react'
 import Icon from '../Icons/Icons';
-import { Trans } from 'react-i18next';
-import { useEffect } from 'react';
 
 const navigation = (props) => {
-    useEffect(() => {
-        console.log(props);
-    });
     return (
         <>
             <nav className="navigation">
                 <div className="navigation__brand">
                     <BrandIcon className="navigation__brand--icon" />
                     <h1 className="navigation__brand--name">
-                        {/* {t'home.content')} */}
+                        پنل مدیریت
                     </h1>
                 </div>
                 <ul className="navigation__list">
@@ -112,7 +107,6 @@ const navigation = (props) => {
                             کاربران
                         </NavLink>
                     </li>
-
                     <li className="navigation__item">
                         <NavLink
                             className="navigation__link"
@@ -131,4 +125,4 @@ const navigation = (props) => {
     );
 }
 
-export default Trans('common')(navigation);
+export default navigation;

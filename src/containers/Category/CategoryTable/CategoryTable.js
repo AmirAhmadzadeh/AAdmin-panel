@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton, Modal, Button
+    Paper, Table, TableHead, TableRow,
+    TableCell,
+    TableBody, IconButton, Modal
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -44,10 +46,8 @@ const categoryTable = (props) => {
         } else {
             catItems = "Loading...";
         }
-
         return catItems;
     }
-
     return (
         <Paper >
             <Modal
@@ -58,11 +58,9 @@ const categoryTable = (props) => {
             >
                 <EditCatBody cats={props.cats}
                     categoryId={selectedCatId}
-                    closeClicked={() => setModalOpen(false)} 
-                    />
-
+                    closeClicked={() => setModalOpen(false)}
+                />
             </Modal>
-
             <Table className="table" >
                 <TableHead className="table__head">
                     <TableRow className="table_row">

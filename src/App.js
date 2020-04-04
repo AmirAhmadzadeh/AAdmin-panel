@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from './containers/Layout/Layout';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
 
-function app(props) {
-
-
-  const { auth, error } = useSelector(state => state.auth);
-
-  useEffect(() => {
-    console.log('amir is here auth is ', auth);
-  }, [auth, error]);
+function app() {
+  const { auth } = useSelector(state => state.auth);
 
   function getContent() {
-
     if (auth) return <Layout />
     return <Auth />
   }
@@ -23,7 +16,6 @@ function app(props) {
     <div className="app" >
       {getContent()}
     </div>
-
   );
 }
 

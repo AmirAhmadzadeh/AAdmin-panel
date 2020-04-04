@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { useInputState, useBoolean, useValue } from './../../../hooks/';
+import { useInputState, useValue } from './../../../hooks/';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { FormControl, FormGroup, InputLabel, Select, Paper, Button } from '@material-ui/core';
 import { editCategory } from '../../../store/action/';
@@ -13,7 +13,7 @@ export default function (props) {
   const [level, setLevel] = useValue(null);
   const [slug, setSlug] = useInputState('');
   const [name, setName] = useInputState('');
-  const [disabledButton, toggle, setDisabledButton] = useBoolean();
+  // const [disabledButton, toggle, setDisabledButton] = useBoolean();
   const dispatch = useDispatch();
   const editCategoryHandler = (catId, data) => dispatch(editCategory(catId, data));
 
