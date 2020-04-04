@@ -1,18 +1,15 @@
 
 import Routes from '../../routes/Routes';
-
 import React, { Component } from 'react'
-
 import Header from './../../components/Header/Header';
-
 import Navigation from './../../components/Navigation/Navigation';
-
-import { useBoolean } from '../../hooks'
+import { useBoolean } from '../../hooks';
+import rtl from '../../RtlService';
 
 function Layout(props) {
     const [show, toggleShow] = useBoolean(false);
     const [BackDrop, toggleBackDrop] = useBoolean(false);
-   
+
     function toggleMenu() {
         toggleShow();
         toggleBackDrop();
@@ -33,6 +30,7 @@ function Layout(props) {
                 <Navigation navItemClicked={toggleMenu} />
             </div>
             <div className="layout__content">
+                <button onClick={rtl.toggle}>Rtltoggle</button>
                 <Header menuIconClicked={toggleMenu} />
                 <Routes />
             </div>

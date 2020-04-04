@@ -1,17 +1,22 @@
-import Aux from "../../hoc/Aux";
 import { NavLink } from 'react-router-dom';
 import BrandIcon from './../../components/Icons/BrandIcon';
 import React from 'react'
 import Icon from '../Icons/Icons';
-
+import { Trans } from 'react-i18next';
+import { useEffect } from 'react';
 
 const navigation = (props) => {
+    useEffect(() => {
+        console.log(props);
+    });
     return (
-        <Aux>
+        <>
             <nav className="navigation">
                 <div className="navigation__brand">
                     <BrandIcon className="navigation__brand--icon" />
-                    <h1 className="navigation__brand--name"> پنل مدیریت  </h1>
+                    <h1 className="navigation__brand--name">
+                        {/* {t'home.content')} */}
+                    </h1>
                 </div>
                 <ul className="navigation__list">
                     <li className="navigation__item">
@@ -122,9 +127,8 @@ const navigation = (props) => {
                     </li>
                 </ul>
             </nav>
-
-        </Aux>
+        </>
     );
 }
 
-export default navigation;
+export default Trans('common')(navigation);

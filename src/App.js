@@ -21,9 +21,7 @@ function app(props) {
 
   return (
     <div className="app" >
-
       {getContent()}
-
     </div>
 
   );
