@@ -8,8 +8,10 @@ import {
   Input,
   MenuItem,
   Checkbox,
-  ListItemText
+  ListItemText,
+  TextField,
 } from '@material-ui/core';
+<<<<<<< HEAD
 import {  useValue } from './../../../hooks/';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import Editor from '../../../components/Editor/Editor';
@@ -21,248 +23,184 @@ import {
 } from '../../../store/action/index';
 
 export default function ({ makeNewCourse, cats , resetCreatePage }) {
+=======
+import { useValue } from './../../../hooks/';
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
+import { reduxForm, Field } from 'redux-form';
 
+function CreateCourse(props) {
   const [errorMsg, setErrorMsg] = useValue(null);
 
-  const state = useSelector(state => state.createCourse)
-  const dispatch = useDispatch();
 
+  function onSubmitHandler(formValues) {
+    console.log(formValues);
 
-  function handleSubmit() {
-
-    // if (state.canSendReq) {
-      setErrorMsg(null);
-
-
-      const data = {
-        slug: state.slug,
-        categories: state.categories,
-        title: state.title,
-        type: state.kindOfCourse,
-        body: state.courseText,
-        price: state.price,
-        tags: state.tag,
-        file: state.courseImage
-      }
-      makeNewCourse(data);
-      resetCreatePage() ;  
-
-    // } else {
-      // setErrorMsg('لطفا ورودی های خود را کنترل کنید !!!');
-    // }
-
+    setErrorMsg(null);
+    const data = {
+      slug: formValues.slug,
+      categories: formValues.categoires,
+      title: formValues.title,
+      type: formValues.selectedKindOfCourse,
+      body: formValues.courseContentText,
+      price: formValues.price,
+      tags: formValues.tags,
+      file: formValues.file
+    }
+    props.makeNewCourse(data);
   }
 
-
-
-
   const isNumber = (n) => (!isNaN(parseFloat(n)) && isFinite(n))
-
-
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isNum', (value) => {
-      if (isNumber(value)) return true;
-      return false
-    });
-
-    // if (state.categories.length === 0) dispatch(setReqPremission(false));
-    // else if (state.categories.length !== 0 && courseImage) dispatch(setReqPremission(true));
-
-
-  });
-
-
+  function renderEditor(formProps) {
+    return (
+      <FormControl>
+        <label className="form__controller--label"> Post Text Content </label>
+        <TextField
+          className="form__controller--inp"
+          fullWidth
+          margin="normal"
+          variant="filled"
+          helperText="Full width!"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          multiline
+          {...formProps.input}
+        />
+      </FormControl>
+    );
+  }
+  const renderInput = (formProps) => {
+    return (
+      <FormControl className="form__controller">
+        <TextField
+          {...formProps.input}
+          className="form__controller--inp"
+          fullWidth
+          margin="normal"
+          variant="filled"
+          helperText="Full width!"
+        />
+      </FormControl>
+    )
+  }
+  const renderKindCourseSelector = (formProps) => {
+    return (
+      <FormControl className="form__controller" variant="filled">
+        <label className="form__controller--label">
+          {formProps.input.label}
+        </label>
+        <Select
+          className="form__controller--select"
+          native
+          {...formProps.input}
+        >
+          {formProps.children}
+        </Select>
+      </FormControl>
+    )
+  }
+  const renderCategorySelector = (formProps) => {
+    return (
+      <FormControl variant="filled" className="form__controller" style={{}}>
+        <label className="form__controller--label">
+          {formProps.input.label}
+        </label>
+        <select
+          multiple
+          {...formProps.input}
+        >
+          {formProps.children}
+        </select>
+      </FormControl>
+    )
+  }
   return (
-    <React.Fragment>
-
+    <>
       <h1> {errorMsg ? errorMsg : null} </h1>
-
-
-      <ValidatorForm onSubmit={handleSubmit}>
+      <form onSubmit={props.handleSubmit(onSubmitHandler)}>
 
         <FormGroup>
-          <FormControl className="form__controller">
-            <TextValidator
-              label="عنوان دوره"
-              className="form__controller--inp"
-              onChange={e => { dispatch(titleChanged(e.target.value)) }}
-              name="title"
-              validators={['required']}
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-              value={state.title}
-              fullWidth
-              margin="normal"
-              variant="filled"
-              // placeholder="Placeholder"
-              helperText="Full width!"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </FormControl>
+          <Field
+            label='title Of Course'
+            name='title'
+            component={renderInput}
+          />
         </FormGroup>
 
-        <FormControl className="form__controller">
+        <Field
+          label='price'
+          name='price'
+          component={renderInput}
+        />
 
-          <TextValidator
-            value={state.price}
-            label="قیمت دوره"
-            className="form__controller--inp"
-            onChange={(e) => { dispatch(priceChanged(e.target.value)) }}
-            name="price"
-            validators={['required', 'isNum']}
-            errorMessages={['لطفا چیزی  را بنویسید !', 'لطفا رقم مبغ دوره را وارد کنید ']}
-            // fullWidth
-            margin="normal"
-            variant="filled"
-            // placeholder="Placeholder"
-            helperText="Full width!"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </FormControl>
+        <Field
+          label='slug'
+          name='slug'
+          component={renderInput}
+        />
+        <Field
+          label='slug'
+          name='tags'
+          component={renderInput}
+        />
+        <FormGroup />
 
-        <FormControl className="form__controller">
-
-          <TextValidator
-            value={state.slug}
-            label="اسلاگ دوره"
-            className="form__controller--inp"
-            onChange={(e) => { dispatch(slugChanged(e.target.value)) }}
-            validators={['required']}
-            errorMessages={['لطفا چیزی  را بنویسید !']}
-            name='slug'
-            // fullWidth
-            margin="normal"
-            variant="filled"
-            // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-            helperText="Full width!"
-            InputLabelProps={{
-              shrink: true,
-            }}
-
-          />
-        </FormControl>
-
-        <FormControl className="form__controller">
-
-          <TextValidator
-            label="تگ های دوره"
-            className="form__controller--inp"
-            name='tag'
-            value={state.tag}
-            onChange={e => { dispatch(tagChanged(e.target.value)) }}
-            validators={['required']}
-            errorMessages={['لطفا چیزی  را بنویسید !']}
-            margin="normal"
-            variant="filled"
-            // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-            helperText="Full width!"
-            InputLabelProps={{
-              shrink: true,
-            }}
-
-          />
-        </FormControl>
         <FormGroup>
-          <FormControl className="form__controller" variant="filled">
-            <label className="form__controller--label">
-              نوع
-              دوره
-                </label>
-            <Select
-              className="form__controller--select"
-              native
-              value={state.kindOfCourse}
-              onChange={(e) => { dispatch(setKindCourse(e.target.value)); }}
+          <Field
+            name='selectedKindOfCourse'
+            label='Type Of Course'
+            component={renderKindCourseSelector}
+          >
+            <option value="free" className="form__controller--option">  رایگان </option>
+            <option value="vip" className="form__controller--option">  دسترسی با عضویت ویژه </option>
+            <option value="cash" className="form__controller--option">نقدی </option>
 
-              inputProps={{
-                name: 'selectedKindOfCourse'
-                // id: 'age-native-simple',
-              }}
-
-            >
-              <option value="free" className="form__controller--option">  رایگان </option>
-              <option value="vip" className="form__controller--option">  دسترسی با عضویت ویژه </option>
-              <option value="cash" className="form__controller--option">نقدی </option>
-
-            </Select>
-          </FormControl>
+          </Field>
         </FormGroup>
+
         <FormGroup>
-
-          <FormControl variant="filled" className="form__controller" style={{}}>
-            <label className="form__controller--label">
-              دسته ها
-                </label>
-            <Select
-              multiple
-              value={state.categories}
-              onChange={(e) => dispatch(setCategories(e.target.value))}
-              input={<Input id="select-multiple-checkbox" />}
-              renderValue={selected => selected.join(', ')}
-
-            >
-              {
-                cats ? cats.map(catItem => (
-                  <MenuItem key={catItem.name} value={catItem._id}>
-                    <Checkbox checked={state.categories.indexOf(catItem._id) > -1} />
-                    <ListItemText primary={catItem.name} />
-                  </MenuItem>
-                )) : null
-              }
-
-            </Select>
-          </FormControl>
+          <Field
+            name='categoires'
+            label='Course Categories'
+            component={renderCategorySelector}
+          >
+            {
+              props.cats ? props.cats.map(catItem => (
+                <option
+                  key={catItem.name}
+                  value={catItem._id}>
+                  {catItem.name}
+                </option>
+              )) : null
+            }
+          </Field>
         </FormGroup>
 
         <FormGroup>
 
           <label className="form__controller--label">
-            لینک تصویر دوره
+            Picture Of Cousrse
                 </label>
-
-          <TextValidator
-              // label="تگ های دوره"
-              className="form__controller--inp"
-              name='file'
-              value={state.courseImage}
-              onChange={e => { dispatch(courseImageChanged(e.target.value)) }}
-              validators={['required']}
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-              margin="normal"
-              variant="filled"
-              // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-              helperText="Full width!"
-              InputLabelProps={{
-                shrink: true,
-              }}
-
+          <Field
+            component={renderInput}
+            name='file'
+            label='Course Image Link'
           />
+
         </FormGroup>
 
         <FormGroup style={{ margin: "4rem 0 0 0" }}>
-          <label className="form__controller--label"> متن دوره </label>
-
-
-          {/* <TextValidator
-                multiline
-                name="courseText"
-                onChange={(e) => { setCourseText(e.target.value) }}
-                validators={['required']}
-                errorMessages={['لطفا چیزی  را بنویسید !']}
-                value={courseText}
-                validators={['required']}
-                errorMessages={['لطفا چیزی  را بنویسید !']}
-              /> */}
-          <Editor
-
+          <label className="form__controller--label"> Course Body Conetnt </label>
+          <Field
+            component={renderEditor}
+            name='courseContentText'
+            label='courseConetentTex'
           />
+
+          {/* <Editor
+          /> */}
         </FormGroup>
-
-
 
         <Button
           // disabled={!state.canSendReq}
@@ -272,8 +210,13 @@ export default function ({ makeNewCourse, cats , resetCreatePage }) {
           style={{
             fontSize: "1.5rem"
             , margin: "3.5rem 0"
-          }}> ایجاد دوره</Button>
-      </ValidatorForm>
-    </React.Fragment>
+          }}> ایجاد دوره
+            </Button>
+      </form>
+    </>
   )
 }
+
+export default reduxForm({
+  form: 'createCourse'
+})(CreateCourse);

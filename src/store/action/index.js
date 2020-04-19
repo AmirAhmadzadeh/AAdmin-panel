@@ -1,64 +1,60 @@
-
-
-
+//menu 
 export {
-   fetchmenu , 
-    makeNewMenu , 
+    fetchmenu,
+    makeNewMenu,
     deleteMenu
-} from './menu' ; 
+} from './menu';
 
+// comment 
 export {
+<<<<<<< HEAD
     fetchComment , 
     approveComment
 } from './comments' ; 
+=======
+    fetchComment
+} from './comments';
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
 
+// categories 
 export {
-    fetchCategory , 
-    makeNewCat , 
-    deleteCat
-} from './category' ; 
+    fetchCategory,
+    makeNewCat,
+    deleteCat,
+    editCategory
+} from './category';
+
+// posts 
+export {
+    createPost,
+    // createPostInit,
+    deletePost,
+    fetchPosts
+} from './post';
 
 
+// course 
 export {
-    fetchCourse , 
-    createCourse , 
-    deleteCourse 
-    , createCourseInit 
-} from './course' ; 
-export {
-    titleChanged,
-    priceChanged , 
-    slugChanged , 
-    tagChanged,
-    setKindCourse , 
-    setCategories , 
-    changeContent , 
-    setReqPremission, 
-    courseImageChanged 
- } from './createCourse' ;
+    fetchCourse,
+    createCourse,
+    deleteCourse
+    // , createCourseInit
+} from './course';
 
+
+// episodes 
 export {
-    fetchEpisode , 
-    resetEpisodeCreatePage, 
+    fetchEpisode,
+
     makeNewEpisode
-} from './episode' ; 
+} from './episode';
 
-export {
-    titleChangedEpisode,
-    setKindEpisode , 
-        
-    changeContentEpisode , 
-    // setReqPremission, 
-    setVideoLink , 
-    setNumberVideo , 
-    changeTimeVideo,
-    setRelaventCourse
- } from './CreateEpisode' ;
 
+// authenticate !! 
 export {
     login
-} from './auth' ; 
+} from './auth';
 
 
- 
+

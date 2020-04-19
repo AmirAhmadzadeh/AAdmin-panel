@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { BrowserRouter } from 'react-router-dom';
-
 
 const AdminPanel = () => {
   return (
@@ -23,6 +21,7 @@ const AdminPanel = () => {
 const store = configureStore();
 
 ReactDOM.render(
+<<<<<<< HEAD
 
   <AdminPanel />
   ,
@@ -33,3 +32,7 @@ ReactDOM.render(
 
 
 serviceWorker.unregister();
+=======
+  <AdminPanel />
+  , document.getElementById('root'));
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6

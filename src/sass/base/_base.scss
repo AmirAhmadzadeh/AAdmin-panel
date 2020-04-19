@@ -1,48 +1,40 @@
-
-*{
-   font-family: Vazir;
-   box-sizing: border-box ; 
-   margin:0 ; 
-   padding: 0 ;
+* {
+  font-family: Vazir;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html{
-    font-size: 62.5% ;  // 1rem = 10px ;   10/16  * 100   =
-    box-sizing: inherit  ;
+html {
+  font-size: 62.5%; // 1rem = 10px ;   10/16  * 100   =
+  box-sizing: inherit;
 
+  @include respond(land-tab) {
+    font-size: 56.25%; // 1rem=9px 9/16 *100
+  }
 
+  @include respond(port-tab) {
+    font-size: 50%; //   1rem=8px (8/16) *100
+  }
 
-    @include respond(land-tab){ 
-        font-size: 56.25% ;  // 1rem=9px 9/16 *100
-     } 
-
-
-     @include respond(port-tab){ 
-        font-size: 50% ;   //   1rem=8px (8/16) *100  
-     } 
-
-    
-     @include respond(large-desktop){ 
-        font-size: 75% ;   // 1rem = 12px   
-     }     
+  @include respond(large-desktop) {
+    font-size: 75%; // 1rem = 12px
+  }
 }
-
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: $color-background ;
-    direction: rtl  ;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $color-background;
+  // direction: rtl;
 }
-  
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-}
-  
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

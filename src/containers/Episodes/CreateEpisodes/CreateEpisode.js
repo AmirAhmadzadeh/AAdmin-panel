@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 //add validation 
 
@@ -6,158 +7,192 @@
 
 import React from 'react';
 
+=======
+import React from 'react';
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import {
   Button,
   FormGroup,
   TextField,
   FormControl,
+<<<<<<< HEAD
   Select
 } from '@material-ui/core';
 
 // import { useInputState } from './../../../hooks';
 
+=======
+  Select,
+  Input,
+  MenuItem,
+  Checkbox,
+  ListItemText
+} from '@material-ui/core';
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import {
   useSelector,
   useDispatch
 } from 'react-redux';
-
 import {
-  setRelaventCourse,
-  setKindEpisode,
-  titleChangedEpisode,
-  changeTimeVideo,
-  setNumberVideo,
-  setVideoLink,
   makeNewEpisode,
-  resetEpisodeCreatePage
 } from './../../../store/action/index';
+import { reduxForm, Field } from 'redux-form';
 
-import EpisodeEditor from '../../../components/Editor/EpisodeEditor';
+function CreateEpisode(props) {
 
-
-
-export default function CreateEpisode(props) {
-
-
-  const state = useSelector(state => state.createEpisode)
+  const state = useSelector(state => state.createEpisode);
   const dispatch = useDispatch();
-  function handleSubmit() {
+
+  function onSubmitHandler(formValues) {
+    console.log('heloo', formValues);
+
     const data = {
-
-      title: state.title,
-      time: state.time,
-      number: state.number,
-      course: state.relavantCourse,
-      videoUrl: state.EpisodeVideoLink,
-      body: state.EpisodeText,
-      type: state.selectedKindOfEpisode,
+      title: formValues.title,
+      time: formValues.time,
+      number: formValues.number,
+      course: formValues.relavantCourse,
+      videoUrl: formValues.link,
+      body: formValues.episodeTextConent,
+      type: formValues.selectedKindOfEpisode,
     }
-
     dispatch(makeNewEpisode(data));
-    dispatch(resetEpisodeCreatePage()) ;
-    props.gotoTable() ;
+    props.gotoTable();
+  }
+  function renderInput(formProps) {
+    return (
+      <FormControl className="form__controller">
+        <TextField
+          className="form__controller--inp"
+          {...formProps.input}
+        />
+      </FormControl>
+    )
+  }
+
+  function renderCategoriesMultipleSelector(formProps) {
+    return (
+      <FormControl variant="filled" className="form__controller" style={{}}>
+        <label className="form__controller--label">
+          {formProps.input.label}
+        </label>
+        <Select
+          {...formProps.input}
+          multiple
+          input={<Input id="select-multiple-checkbox" />}
+          renderValue={selected => selected.join(', ')}
+        >
+          {
+            this.props.cats ? this.props.cats.map(catItem => (
+              <MenuItem key={catItem.name} value={catItem._id}>
+                <Checkbox checked={this.props.categories.indexOf(catItem._id) > -1} />
+                <ListItemText primary={catItem.name} />
+              </MenuItem>
+            )) : null
+          }
+        </Select>
+      </FormControl>
+    )
+  }
+
+  function renderTypeCourseSelector(formProps) {
+    return (
+      <FormControl className="form__controller" variant="filled">
+        <label className="form__controller--label">
+          {formProps.input.label}
+        </label>
+        <Select
+          className="form__controller--select"
+          native
+          {...formProps.input}
+        >
+          {formProps.children}
+        </Select>
+      </FormControl>
+    )
+  }
+  function renderRelatedCourseSelector(formProps) {
+    return (
+      <FormControl className="form__controller">
+        <label className="form__controller--label">
+          {formProps.input.label}
+        </label>
+        <Select
+          className="form__controller--select"
+          native
+          {...formProps.input}
+        >
+          {formProps.children}
+        </Select>
+      </FormControl>
+    )
+  }
+  function renderEditor(formProps) {
+    return (
+      <TextField
+        multiline
+        fullWidth
+        {...formProps.input}
+      />
+    )
   }
   return (
-    <React.Fragment>
+    <form onSubmit={props.handleSubmit(onSubmitHandler)}>
+      <Field
+        name='title'
+        component={renderInput}
+        label='Episode Title'
+      />
+      <Field
+        label='Video Time'
+        name='time'
+        component={renderInput}
+      />
 
-      <FormControl className="form__controller">
-        <TextField
-          label="عنوان ویدیو"
-          className="form__controller--inp"
-          onChange={e => { dispatch(titleChangedEpisode(e.target.value)) }}
-          name="title"
-        />
-      </FormControl>
-
-      <FormControl className="form__controller">
-        <TextField
-          label="زمان ویدیو"
-          className="form__controller--inp"
-          onChange={e => { dispatch(changeTimeVideo(e.target.value)) }}
-          inputProps={{
-            name: "time"
-          }}
-        />
-      </FormControl>
-      <FormControl className="form__controller">
-        <TextField
-          label="شماره ی ویدیو"
-          className="form__controller--inp"
-          onChange={(e) => dispatch(setNumberVideo(e.target.value))}
-          inputProps={{
-            name: "number"
-          }}
-        />
-      </FormControl>
-
-
-
-
+      <Field
+        label='Video number'
+        name='number'
+        component={renderInput}
+      />
       <FormGroup>
-        <FormControl className="form__controller">
-          <TextField
-            label=" لینک ویدو"
-            className="form__controller--inp"
-            onChange={(e) => dispatch(setVideoLink(e.target.value))}
-            inputProps={{
-              name: "link"
-            }}
-          />
-        </FormControl>
-        <FormControl className="form__controller">
-          <label className="form__controller--label">
-            نوع
-            ویدیو
-            </label>
-          <Select
-            className="form__controller--select"
-            native
-            // value={selectedMenuItemLevel ? state.selectedMenuItemLevel.name : null}
-            onChange={(e) => dispatch(setKindEpisode(e.target.value))}
+        <Field
+          label='Video Link'
+          name='link'
+          component={renderInput}
+        />
+        <Field
+          name='selectedKindOfEpisode'
+          label='Select Type Of episode'
+          component={renderTypeCourseSelector}
+        >
+          <option value="free" className="form__controller--option">  Free </option>
+          <option value="vip" className="form__controller--option">  Vip Access </option>
+          <option value="cash" className="form__controller--option"> Cash </option>
+        </Field>
 
-            inputProps={{
-              name: 'selectedKindOfEpisode'
-              // id: 'age-native-simple',
-            }}
-          >
-            <option value="free" className="form__controller--option">  رایگان </option>
-            <option value="vip" className="form__controller--option">  دسترسی با عضویت ویژه </option>
-            <option value="cash" className="form__controller--option">نقدی </option>
-
-          </Select>
-        </FormControl>
-
-        <FormControl className="form__controller">
-          <label className="form__controller--label">
-            دوره مربوطه
-            </label>
-          <Select
-
-            className="form__controller--select"
-            native
-            value={state.relavantCourse}
-            onChange={(e) => dispatch(setRelaventCourse(e.target.value))}
-            inputProps={{
-              name: 'relavantCourse'
-              // id: 'age-native-simple',
-            }}
-
-          >
-            {
-              props.courses ? props.courses.map(courseItem => (
-                <option value={courseItem._id}
-                  key={courseItem._id}
-                  className="form__controller--option">  {courseItem.title}
-                </option>
-              )) : null
-            }
-          </Select>
-        </FormControl>
+        <Field
+          name='relavantCourse'
+          label='Relavant Course'
+          component={renderRelatedCourseSelector}
+        >
+          {
+            props.courses ? props.courses.map(courseItem => (
+              <option value={courseItem._id}
+                key={courseItem._id}
+                className="form__controller--option">  {courseItem.title}
+              </option>
+            )) : null
+          }
+        </Field>
       </FormGroup>
       <FormGroup>
         <FormControl>
           <label className="form__controller--label"> توضیح ویدیو </label>
-          <EpisodeEditor />
+          {/* <EpisodeEditor /> */}
+          <Field
+            name='episodeTextConent'
+            label='episodeTextContent'
+            component={renderEditor}
+          />
         </FormControl>
       </FormGroup>
 
@@ -169,12 +204,15 @@ export default function CreateEpisode(props) {
           fontSize: "1.5rem"
           , margin: "3.5rem 0"
         }}
-        onClick={handleSubmit}> ساختن
+      >
+        Create Episode !!!!
         </Button>
-
-    </React.Fragment>
+    </form>
   )
 }
 
 
 
+export default reduxForm({
+  form: 'createEpisode'
+})(CreateEpisode); 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -5,13 +6,19 @@
 
 import React  from 'react';
 
+=======
+import React from 'react';
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import {
   FormControl,
-   InputLabel,
-  Select, Button,
-  FormGroup
+  InputLabel,
+  Select,
+  Button,
+  FormGroup,
+  TextField
 } from '@material-ui/core';
 
+<<<<<<< HEAD
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
 import { useInputState , useValue } from './../../../hooks/';
@@ -35,107 +42,102 @@ function CreateCategory(props) {
     props.createNewCategory({  name , slug , parent : level  }) ; 
   } 
 
+=======
+import { reduxForm, Field } from 'redux-form';
+
+function CreateCategory(props) {
+
+  // const [disabledButton, toggle, setDisabledButton] = useBoolean();
+  const onSubmitHandler = (formValues) => {
+
+    console.log(formValues);
+    // props.createNewCategory({
+    //   name: name,
+    //   slug: slug,
+    //   parent: level
+    // });
+  }
+  const renderInput = (formProps) => {
+    return (
+      <FormControl className="form__controller">
+        <TextField
+          className="form__controller--inp"
+          {...formProps.input}
+        />
+      </FormControl>
+    )
+  }
+
+  const renderLevelSelector = (formProps) => {
+    return (
+      <FormControl className="form__controller">
+        <InputLabel
+          htmlFor="age-native-simple"
+          className="form__controller--label">
+          Category Level
+               </InputLabel>
+        <Select
+          className="form__controller--select"
+          native
+          {...formProps}
+        >
+          {formProps.children}
+        </Select>
+      </FormControl>
+    )
+  }
+>>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
   return (
-
-
     <div className="menu__createMenu">
-
-      <ValidatorForm onSubmit={handleSubmit}>
-
+      <form onSubmit={props.handleSubmit(onSubmitHandler)} >
         <FormGroup>
+          <Field
+            label='name'
+            name='name'
+            component={renderInput}
+          />
 
-          <FormControl className="form__controller">
+          <Field
+            label='slug'
+            name='slug'
+            component={renderInput}
+          />
 
-            <TextValidator
-                value={name}
-
-                label="نام دسته "
-
-                className="form__controller--inp"
-
-                onChange={(e) => setName(e.target.value)}
-
-                name="name"
-
-                validators={['required']}
-
-                errorMessages={['لطفا چیزی  را بنویسید !']}
-            />
-          </FormControl>
-
-          <FormControl className="form__controller">
-
-            <TextValidator
-
-              value={slug}
-
-              label="اسلاگ"
-
-              className="form__controller--inp"
-
-              onChange={(e) => setSlug(e.target.value)}
-
-              name="slug"
-
-              validators={['required']}
-
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-
-            />
-
-          </FormControl>
-
-          <FormControl className="form__controller">
-            <InputLabel htmlFor="age-native-simple" className="form__controller--label">سطح دسته</InputLabel>
-            <Select
-
-              className="form__controller--select"
-
-              native
-
-              value={level ? level.name : null}
-
-              onChange={(e) => setLevel(e.target.value)}
-
-              name="level"
-
-            >
-              <option value='none' className="form__controller--option"> دسته اصلی </option>
-              {
-                props.cats ? props.cats.map(catItme => {
-                  return <option
+          <Field
+            name='level'
+            label='Category Level'
+            component={renderLevelSelector}
+          >
+            <option value='none' className="form__controller--option">
+              main category
+               </option>
+            {
+              props.cats ? props.cats.map(catItme => {
+                return (
+                  <option
                     value={catItme._id}
                     className="form__controller--option">
                     {catItme.name}
-                  </option>
-                }) : "Loading..."
-
-              }
-
-            </Select>
-
-          </FormControl>
+                  </option>)
+              }) : "Loading..."
+            }
+          </Field>
         </FormGroup>
-
-
-          <Button
-
-            color="primary"
-            variant="contained"
-            className="form__controller--button"
-            type="submit"   
-          // disabled={disabledButton}
-          >
-
-            ساختن
-
+        <Button
+          color="primary"
+          variant="contained"
+          className="form__controller--button"
+          type="submit"
+        // disabled={disabledButton}
+        >
+          Create!
               </Button>
-
-
-      </ValidatorForm>
-
+      </form>
     </div>
 
   )
 }
-export default CreateCategory;  
+
+export default reduxForm({
+  form: 'createCategory'
+})(CreateCategory);  
