@@ -1,34 +1,15 @@
-<<<<<<< HEAD
-
-//add validation 
-
-
-
-
 import React from 'react';
-
-=======
-import React from 'react';
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import {
   Button,
   FormGroup,
   TextField,
   FormControl,
-<<<<<<< HEAD
-  Select
-} from '@material-ui/core';
-
-// import { useInputState } from './../../../hooks';
-
-=======
   Select,
   Input,
   MenuItem,
   Checkbox,
   ListItemText
 } from '@material-ui/core';
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import {
   useSelector,
   useDispatch

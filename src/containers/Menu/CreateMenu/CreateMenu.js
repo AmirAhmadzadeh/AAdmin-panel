@@ -7,28 +7,12 @@ import {
   TextField
 } from '@material-ui/core';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
-<<<<<<< HEAD
-
-import { useInputState , useValue } from './../../../hooks/';
-
-=======
 import { useInputState, useValue } from './../../../hooks/';
 import { Field, reduxForm } from 'redux-form';
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
 
 function CreateMenu(props) {
 
-<<<<<<< HEAD
-  const [level, setLevel] = useValue(null);
-
-  const [link, setLink] = useInputState('');
-
-  const [name, setName] = useInputState('');
-
-  // const [disabledButton, toggle, setDisabledButton] = useBoolean();
-=======
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
   function handleSubmit() {
     console.log(props);

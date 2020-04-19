@@ -5,10 +5,6 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-<<<<<<< HEAD
-import React from 'react';
-=======
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
 
 

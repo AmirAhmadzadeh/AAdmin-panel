@@ -7,7 +7,7 @@ export const approveComment = (commentID) => {
     return dispatch => {
         axios.get(`/approveComment/${commentID}?api_token=${localStorage.getItem('token')}`)
             .then(response => {
-                dispatch(exportCommentSuccess(response.data));
+                // dispatch(exportCommentSuccess(response.data));
             })
             .catch(err => {
 
@@ -17,18 +17,17 @@ export const approveComment = (commentID) => {
 };
 
 
-export const exportCommentSuccess = (data) => {
-    return {
-        type: actionTypes.APPROVE_COMMENT_SUCCESS,
-        data: data
-    }
-};
+// export const exportCommentSuccess = (data) => {
+//     return {
+//         type: actionTypes.APPROVE_COMMENT_SUCCESS,
+//         data: data
+//     }
+// };
 
 
 // fetch comments 
 
 export const fetchComment = (approved) => {
-    //  console.log(`ami is here ` ,  approved) ;   
     return dispatch => {
 
         console.log(`hello amir is here in fetch comments `)

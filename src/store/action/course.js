@@ -16,8 +16,6 @@ export const fetchCourse = () => {
                 // handle errors
                 console.log('wht is error', error);
             });
-
-
     }
 };
 

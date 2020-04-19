@@ -11,21 +11,7 @@ import {
   ListItemText,
   TextField,
 } from '@material-ui/core';
-<<<<<<< HEAD
-import {  useValue } from './../../../hooks/';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import Editor from '../../../components/Editor/Editor';
-import {
-  titleChanged, priceChanged,
-  slugChanged, tagChanged,
-  setKindCourse, setCategories,
-  courseImageChanged
-} from '../../../store/action/index';
-
-export default function ({ makeNewCourse, cats , resetCreatePage }) {
-=======
 import { useValue } from './../../../hooks/';
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
 import { reduxForm, Field } from 'redux-form';
 

@@ -7,14 +7,8 @@ export {
 
 // comment 
 export {
-<<<<<<< HEAD
-    fetchComment , 
-    approveComment
-} from './comments' ; 
-=======
     fetchComment
 } from './comments';
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 
 
 // categories 

@@ -1,12 +1,6 @@
 
 import Routes from '../../routes/Routes';
-<<<<<<< HEAD
-
-import React from 'react';
-
-=======
 import React from 'react'
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import Header from './../../components/Header/Header';
 import Navigation from './../../components/Navigation/Navigation';
 import { useBoolean } from '../../hooks';

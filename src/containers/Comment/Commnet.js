@@ -3,7 +3,7 @@ import DisApprovedComments from './disApprovedComments/disApprovedComments';
 import ApprovedComments from './approvedComments/ApprovedComments';
 import { Tabs, Tab } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { fetchComment, approveComment } from '../../store/action/';
+import { fetchComment  } from '../../store/action/';
 import { useValue } from './../../hooks';
 
 
@@ -69,7 +69,7 @@ const mapDispatchToProps = dispatch => {
 
     return {
         loadcomments: (approveSituation) => dispatch(fetchComment(approveSituation)),
-        approveComment: (id) => dispatch(approveComment(id))
+        // approveComment: (id) => dispatch(approveComment(id))
     }
 }
 

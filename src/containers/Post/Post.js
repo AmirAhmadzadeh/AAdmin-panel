@@ -37,7 +37,6 @@ class Post extends Component {
       return <PostTable />
     }
     return <CreatePost
-      // resetCreatePage={this.resetCreatePageHandler}
       makeNewCourse={this.createPostHandler}
       created={this.props.created} />
   }
@@ -46,7 +45,7 @@ class Post extends Component {
     return (
       <div className="menu">
         <h1 className="heading__scondary heading">
-          پست ها
+           Posts 
         </h1>
         <Tabs
           value={this.state.value}

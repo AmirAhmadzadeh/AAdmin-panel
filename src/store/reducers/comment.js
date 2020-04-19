@@ -19,15 +19,13 @@ const commentReducer = (state = initState, action) => {
                 comments: action.data
             }
         }
-        case actionTypes.APPROVE_COMMENT_SUCCESS : { 
-            return { 
-                ...state , 
-            }
-        }
+        // case actionTypes.APPROVE_COMMENT_SUCCESS : { 
+        //     return { 
+        //         ...state , 
+        //     }
+        // }
 
         case actionTypes.FETCH_DISAPPROVED_COMMENTS_SUCCESS: {
-
-            // console.log('hello' , action.data)    
             return {
                 ...state,
                 comments: action.data

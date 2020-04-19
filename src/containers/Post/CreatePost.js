@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
   Button, FormGroup,
-  FormControl, TextField
+  FormControl, TextField ,  
 } from '@material-ui/core';
-
 
 import { reduxForm, Field } from 'redux-form';
 
@@ -26,7 +25,6 @@ class CreatePost extends Component {
       errorMsg: null
     });
 
-    console.log('In create Post ', formValues);
     const data = {
       slug: formValues.slug,
       categories: formValues.categories,
@@ -40,14 +38,21 @@ class CreatePost extends Component {
   }
 
   renderInput(formProps) {
+    // formProps.meta.touched 
+    // formProps.meta.invalid
     return (
       <FormControl className="form__controller">
+         <label 
+            for={formProps.label}>
+           {formProps.label}
+         </label> 
         <TextField
           className="form__controller--inp"
           fullWidth
           margin="normal"
           variant="filled"
-          helperText="Full width!"
+          helperText={formProps.meta.touched && formProps.meta.invalid}
+          error={formProps.meta.touched}
           InputLabelProps={{
             shrink: true,
           }}
@@ -59,7 +64,6 @@ class CreatePost extends Component {
   }
 
   renderCategoriesMultipleSelector(formProps) {
-    console.log(formProps, 'DOOOOOOO');
     return (
       <select
         multiple
@@ -75,7 +79,10 @@ class CreatePost extends Component {
   renderEditor(formProps) {
     return (
       <FormControl>
-        <label className="form__controller--label"> Post Text Content </label>
+        <label 
+        // className="form__controller--label"
+        > 
+        { formProps.label } </label>
         <TextField
           className="form__controller--inp"
           fullWidth
@@ -90,6 +97,10 @@ class CreatePost extends Component {
         />
       </FormControl>
     );
+  }
+
+  renderFormHelper() { 
+    
   }
   render() {
     return (
@@ -175,6 +186,29 @@ class CreatePost extends Component {
       </>
     )
   }
+} 
+
+const validate = values => {
+  const errors = {}
+  
+  const requiredFields = [
+    'title' , 
+    'slug' , 
+    'tag' , 
+    'categories' , 
+    'file' , 
+    'editor' , 
+  ]  ; 
+  requiredFields.forEach(field => { 
+    if (!values[field]) {
+      errors[field] = 'Required'
+    } 
+  })
+  if (values['categories'] && values['categories'].length < 1) { 
+    errors['categories'] = 'Please Select Some Categories !'
+  }
+  console.log('hello errors' , errors) ; 
+  return errors ;  
 }
 const mapStateToProps = state => {
   return {
@@ -182,6 +216,7 @@ const mapStateToProps = state => {
   }
 };
 export default connect(mapStateToProps)(reduxForm({
-  form: 'createPost'
+  form: 'createPost' , 
+  validate
 })(CreatePost));
 

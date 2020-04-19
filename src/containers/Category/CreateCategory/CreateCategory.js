@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-
-
-
-
-
-import React  from 'react';
-
-=======
 import React from 'react';
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
 import {
   FormControl,
   InputLabel,
@@ -18,31 +8,6 @@ import {
   TextField
 } from '@material-ui/core';
 
-<<<<<<< HEAD
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
-
-import { useInputState , useValue } from './../../../hooks/';
-
-
-
-function CreateCategory(props) {
-
-  const [level, setLevel] = useValue(null);
-
-  const [slug, setSlug] = useInputState('');
-
-  const [name, setName] = useInputState('');
-
-  // const [disabledButton, toggle, setDisabledButton] = useBoolean();
-
-  
-
-  const handleSubmit  = () => {
-     
-    props.createNewCategory({  name , slug , parent : level  }) ; 
-  } 
-
-=======
 import { reduxForm, Field } from 'redux-form';
 
 function CreateCategory(props) {
@@ -86,7 +51,6 @@ function CreateCategory(props) {
       </FormControl>
     )
   }
->>>>>>> e6ef226b4af024c7135f9a25fd4ba073ab703de6
   return (
     <div className="menu__createMenu">
       <form onSubmit={props.handleSubmit(onSubmitHandler)} >
