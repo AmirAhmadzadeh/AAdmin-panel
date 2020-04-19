@@ -11,17 +11,22 @@ import { BrowserRouter } from 'react-router-dom';
 const AdminPanel = () => {
   return (
     <Provider store={store}>
+
       <BrowserRouter basename='/admin'>
         <App />
       </BrowserRouter>
+
     </Provider>
   )
 }
 
 const store = configureStore();
+
 ReactDOM.render(
-    <AdminPanel />
-  , document.getElementById('root'));
+
+  <AdminPanel />
+  ,
+  document.getElementById('root'));
 
 
 

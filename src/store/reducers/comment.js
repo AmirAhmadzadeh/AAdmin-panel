@@ -10,13 +10,18 @@ const initState = {
 const commentReducer = (state = initState, action) => {
 
     switch (action.type) {
-
+        
         case actionTypes.FETCH_APPROVED_COMMENTS_SUCCESS: {
 
 
             return {
                 ...state,
                 comments: action.data
+            }
+        }
+        case actionTypes.APPROVE_COMMENT_SUCCESS : { 
+            return { 
+                ...state , 
             }
         }
 

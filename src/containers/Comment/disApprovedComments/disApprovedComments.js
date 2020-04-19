@@ -22,7 +22,11 @@ const DisapprovedCommnts = (props) => {
                     <TableCell className="table__cell" align="right">{commentItem.comment}</TableCell>
 
                     <TableCell className="table__cell" align="right">
-                        <IconButton className="table__icon" color="primary" aria-label="Edit">
+                        <IconButton
+                            className="table__icon"
+                            color="primary"
+                            aria-label="Edit"
+                            onClick={() => props.addToApproved(commentItem._id)}>
                             <AddIcon />
                         </IconButton>
                         <IconButton className="table__icon" color="secondary" aria-label="Edit">
@@ -32,7 +36,7 @@ const DisapprovedCommnts = (props) => {
                 </TableRow>
             );
         });
-        
+
     } else {
         comments = "Loading...";
     }

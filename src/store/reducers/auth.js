@@ -2,10 +2,6 @@
 import * as actionTypes from './../action/actionTypes' ;
  
 
-const initState = {
-    auth : false , 
-    error : false 
-} 
 
 
 

@@ -3,7 +3,7 @@
 
 
 
-import React, { useEffect } from 'react';
+import React  from 'react';
 
 import {
   FormControl,
@@ -14,7 +14,7 @@ import {
 
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
-import { useInputState, useBoolean, useValue } from './../../../hooks/';
+import { useInputState , useValue } from './../../../hooks/';
 
 
 
@@ -26,7 +26,7 @@ function CreateCategory(props) {
 
   const [name, setName] = useInputState('');
 
-  const [disabledButton, toggle, setDisabledButton] = useBoolean();
+  // const [disabledButton, toggle, setDisabledButton] = useBoolean();
 
   
 

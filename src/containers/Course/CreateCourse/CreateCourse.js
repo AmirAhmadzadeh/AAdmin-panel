@@ -10,14 +10,14 @@ import {
   Checkbox,
   ListItemText
 } from '@material-ui/core';
-import { useFilePicker, useValue } from './../../../hooks/';
+import {  useValue } from './../../../hooks/';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import Editor from '../../../components/Editor/Editor';
 import {
   titleChanged, priceChanged,
   slugChanged, tagChanged,
   setKindCourse, setCategories,
-  setReqPremission , courseImageChanged
+  courseImageChanged
 } from '../../../store/action/index';
 
 export default function ({ makeNewCourse, cats , resetCreatePage }) {

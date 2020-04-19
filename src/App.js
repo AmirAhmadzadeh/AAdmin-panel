@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Layout from './containers/Layout/Layout';
-import { useSelector ,useDispatch} from 'react-redux' ; 
+import { useSelector } from 'react-redux' ; 
 import Auth from './containers/Auth/Auth' ; 
 
 
@@ -22,11 +22,8 @@ function app(props) {
   
   return (
     <div className="app" >
-  
       {getContent()}
-  
     </div>
-  
   ) ; 
 }
 

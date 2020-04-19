@@ -8,7 +8,8 @@ export {
 } from './menu' ; 
 
 export {
-    fetchComment
+    fetchComment , 
+    approveComment
 } from './comments' ; 
 
 
