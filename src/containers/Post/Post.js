@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tab, Tabs } from '@material-ui/core';
 import {
-  fetchCategory, createPost, createPostInit,
+  fetchCategory, createPost
 } from '../../store/action/';
 import CreatePost from './CreatePost';
 import PostTable from './PostTable';
@@ -13,15 +13,14 @@ class Post extends Component {
     this.state = {
       value: 0
     }
-    this.resetCreatePageHandler = this.resetCreatePageHandler.bind(this);
     this.createPostHandler = this.createPostHandler.bind(this);
     this.removePostHandler = this.removePostHandler.bind(this);
     this.getContent = this.getContent.bind(this);
   }
-
-  resetCreatePageHandler() {
-    this.props.onResetCreatePost();
+  componentDidMount() {
+    this.props.onLoadCats();
   }
+
   createPostHandler(data) {
     this.props.onCreatePost(data);
     this.setState({
@@ -38,7 +37,7 @@ class Post extends Component {
       return <PostTable />
     }
     return <CreatePost
-      resetCreatePage={this.resetCreatePageHandler}
+      // resetCreatePage={this.resetCreatePageHandler}
       makeNewCourse={this.createPostHandler}
       created={this.props.created} />
   }
@@ -56,8 +55,8 @@ class Post extends Component {
           textColor="primary"
           centered
         >
-          <Tab label="مشاهده ی لیست دوره ها" className="menu__tab-label" />
-          <Tab label="ایجاد دوره جدید " className="menu__tab-label" />
+          <Tab label="All Posts" className="menu__tab-label" />
+          <Tab label="Make New Post" className="menu__tab-label" />
         </Tabs>
         <div className="menu__cmpArea">
           {this.getContent()}
@@ -80,7 +79,6 @@ const mapDispatchToProps = dispatch => {
 
     onLoadCats: () => dispatch(fetchCategory()),
     onCreatePost: (data) => dispatch(createPost(data)),
-    onResetCreatePost: () => dispatch(createPostInit())
   }
 };
 

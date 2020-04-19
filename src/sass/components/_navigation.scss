@@ -6,11 +6,11 @@
   }
   height: 100vh;
   background-image: linear-gradient(rgba($color-black, 0.75) 100%, transparent),
-    url('./assets/sidebar-2.d30c9e30.jpg');
+    url('./assets/177004.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0 2rem 4.5rem rgba($color-black, 0.15);
-  // overflow-y: scroll ;
+  overflow-y: scroll;
 
   color: rgba($color-white, 0.8);
   &__link {
@@ -20,16 +20,17 @@
       color: inherit;
       display: inline-block;
       width: 77%;
-      padding: 1.5rem 10px;
+      padding: 1rem;
       border-radius: 5%;
       transition: all 0.4s;
       margin-right: 2rem;
     }
 
     &--icon {
-      padding: 0 0 0 7px;
+      padding: 0 7px 0 0;
       transform: translateY(0.5rem);
     }
+
     &:hover,
     &:active {
       background-color: rgba(200, 200, 200, 0.2);
@@ -39,7 +40,8 @@
 
   &__item {
     list-style: none;
-    text-align: right;
+
+    // text-align: right;
   }
 
   &__list {
@@ -68,7 +70,7 @@
 
     &--icon {
       font-size: 4rem !important ;
-      float: right;
+      float: left;
     }
   }
 }

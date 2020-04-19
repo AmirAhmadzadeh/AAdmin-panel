@@ -1,17 +1,13 @@
-
-
-.table{ 
-    &__cell{
-        font-size: 1.42rem !important   ;
-    }
-    &__icon span{
-        font-size: .9rem ;
-    }
-    &__row{
-        transition: all .2s ease-in-out ; 
-    }
-
-    &__head{
-
-    }
+.table {
+  &__cell {
+    font-size: 1.42rem !important   ;
+  }
+  &__icon span {
+    font-size: 0.9rem;
+  }
+  &__row {
+    transition: all 0.2s ease-in-out;
+  }
+  &__head {
+  }
 }

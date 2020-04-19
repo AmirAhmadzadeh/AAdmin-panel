@@ -1,49 +1,47 @@
+.layout {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: stretch;
 
+  &__content {
+    flex-basis: 80%;
+  }
+  &__navigation {
+    flex-basis: 30%;
+    transition: all 0.2s ease-in;
+    flex-grow: 1;
 
-
-.layout{
-    display: flex ;
-    &__navigation{
-         flex: 0 1 25rem ;
-         transition: all .2s ease-in ;     
-         
-         @include respond(land-tab){
-             flex : 0 1 19rem ;
-             width: 19rem; 
-
-         }
-         @include respond(port-tab){
-            position: absolute ; 
-            width: 0 ; 
-            transform: translateX(20rem) ; 
-         }
-
-        &__backDrop{
-          
-            @include respond(port-tab){
-                position: fixed;
-                z-index: 1;
-                top: 0  ;
-                left: 0;
-                width: 100vh; 
-                height: 100vh ; 
-                background-color: rgba($color-black,.2 ) ;
-            }    
-        } 
-
-        &__show{
-            @include respond(port-tab){
-                position: fixed ;
-                width: 26rem;
-                transform: translateX(0);
-                z-index: 3;
-            }    
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include respond(land-tab) {
+      flex-basis: 19rem;
+    }
+    @include respond(port-tab) {
+      position: absolute;
+      width: 0;
+      transform: translateX(20rem);
     }
 
-    &__content{
-        flex: 1 ;
-          
+    &__show {
+      @include respond(port-tab) {
+        position: fixed;
+        width: 26rem;
+        transform: translateX(0);
+        z-index: 3;
+      }
     }
+    &__backDrop {
+      @include respond(port-tab) {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100vh;
+        height: 100vh;
+        background-color: rgba($color-black, 0.2);
+      }
+    }
+  }
 }
-

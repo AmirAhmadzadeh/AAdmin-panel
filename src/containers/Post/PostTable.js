@@ -46,9 +46,9 @@ class PostTable extends Component {
         <Table className="table" >
           <TableHead className="table__head">
             <TableRow className="table_row">
-              <TableCell align="right" className="table__cell">عنوان /</TableCell>
-              <TableCell align="right" className="table__cell">تعداد بازدید</TableCell>
-              <TableCell align="right" className="table__cell">   	تنظیمات</TableCell>
+              <TableCell align="right" className="table__cell">Title</TableCell>
+              <TableCell align="right" className="table__cell">Views</TableCell>
+              <TableCell align="right" className="table__cell"> Opreations </TableCell>
             </TableRow>
           </TableHead>
           <TableBody className="table__body">

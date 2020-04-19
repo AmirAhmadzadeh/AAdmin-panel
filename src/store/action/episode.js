@@ -34,7 +34,7 @@ export const fetchEpisodeSuccess = (data) => {
 export const makeNewEpisode = (data) => {
 
 
-    console.log('amir is here' ,data) ; 
+    console.log('amir is here', data);
     return dispatch => {
 
         axios.post(`/createEpisode?api_token=${localStorage.getItem('token')}`, {
@@ -48,12 +48,12 @@ export const makeNewEpisode = (data) => {
                 if (response.data.status) {
 
                     dispatch(createEpisodeSuccessFully(response.data))
-                    dispatch(resetEpisodeCreatePage());
+                    // dispatch(resetEpisodeCreatePage());
                 }
             })
             .catch(err => {
                 console.log(`Error in create course action`)
-            }) ; 
+            });
     }
 }
 
@@ -61,5 +61,4 @@ export const createEpisodeSuccessFully = () => ({ status: true, type: actions.CR
 
 
 
-export const resetEpisodeCreatePage = () => ({ type: actions.CREATE_EPISODE_INIT });
 

@@ -41,7 +41,7 @@ export const createCourse = (data) => {
                 if (response.data.status) {
 
                     dispatch(courseCreatedSuccessFully(response.data))
-                    dispatch(createCourseInit()) ;  
+                    // dispatch(createCourseInit());
                 }
             })
             .catch(err => {
@@ -51,31 +51,21 @@ export const createCourse = (data) => {
 }
 
 export const courseCreatedSuccessFully = () => ({ status: true, type: actions.CREATE_COURSE_SUCCESS });
-export const createCourseInit = () => ({  type: actions.CREATE_COURSE_INIT });
+
 
 // delete course 
 export const deleteCourse = (id) => {
 
     return dispatch => {
-
         axios.delete(`/deleteCourse/${id}?api_token=${localStorage.getItem('token')}`)
-
             .then(response => {
-
                 console.log(response.data, 'amir in deletecourse action ');
-
                 dispatch(deleteCreatedSuccessFully());
-
                 dispatch(fetchCourse());
-
             })
-
             .catch(err => {
-
                 console.log(`error in dekleting course`);
-
             })
-
     }
 }
 

@@ -4,25 +4,20 @@ import menuReducer from './reducers/menu';
 import commentReducer from './reducers/comment';
 import categoryReducer from './reducers/category';
 import courseReducer from './reducers/course/course';
-import createCourseReducer from './reducers/course/createCourse';
 import episodeReducer from './reducers/episode/episode';
-import createEpisodeReducer from './reducers/episode/createEpisode';
 import authReducer from './reducers/auth';
 import postReducer from './reducers/post/post'
-import createPost from './reducers/post/createPost';
-
+import { reducer as formReducer } from 'redux-form';
 
 const reducer = combineReducers({
+    form: formReducer,
     auth: authReducer,
     menu: menuReducer,
     comments: commentReducer,
     cats: categoryReducer,
     course: courseReducer,
-    createCourse: createCourseReducer,
-    createEpisode: createEpisodeReducer,
     episode: episodeReducer,
     post: postReducer,
-    createPost: createPost
 });
 
 

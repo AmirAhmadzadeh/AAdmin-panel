@@ -8,7 +8,7 @@ import {
 import './style.css';
 import { stateToHTML } from 'draft-js-export-html';
 import { connect } from 'react-redux';
-import { changeContent } from '../../store/action/';
+
 class ContentEditor extends React.Component {
     constructor(props) {
         super(props);
@@ -205,9 +205,6 @@ const InlineStyleControls = (props) => {
 
 
 
-const mapDispatchToProps = dispatch => ({
-    onChangeContent: (data) => dispatch(changeContent(data))
-})
 
 
-export default connect(null, mapDispatchToProps)(ContentEditor);  
+export default ContentEditor

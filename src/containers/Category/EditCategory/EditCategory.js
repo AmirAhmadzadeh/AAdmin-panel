@@ -34,12 +34,12 @@ export default function (props) {
             <FormControl className="form__controller">
               <TextValidator
                 value={name}
-                label="نام دسته "
+                label="category name"
                 className="form__controller--inp"
                 onChange={(e) => setName(e.target.value)}
                 name="name"
                 validators={['required']}
-                errorMessages={['لطفا چیزی  را بنویسید !']}
+                errorMessages={['Please Fill this Field!']}
               />
             </FormControl>
             <FormControl className="form__controller">
@@ -50,18 +50,18 @@ export default function (props) {
                 onChange={(e) => setSlug(e.target.value)}
                 name="slug"
                 validators={['required']}
-                errorMessages={['لطفا چیزی  را بنویسید !']}
+                errorMessages={['Please Fill this Field!']}
               />
             </FormControl>
             <FormControl className="form__controller">
-              <InputLabel htmlFor="age-native-simple" className="form__controller--label">سطح دسته</InputLabel>
+              <InputLabel htmlFor="age-native-simple" className="form__controller--label">level</InputLabel>
               <Select
                 className="form__controller--select"
                 native
                 value={level ? level.name : null}
                 onChange={(e) => setLevel(e.target.value)}
                 name="level">
-                <option value='none' className="form__controller--option"> دسته اصلی </option>
+                <option value='none' className="form__controller--option"> Main Category </option>
                 {
                   props.cats ? props.cats.map(catItme => {
                     return <option
@@ -81,7 +81,7 @@ export default function (props) {
             type="submit"
           // disabled={disabledButton}
           >
-            ویرایش
+            Edit
               </Button>
           <Button
             color='secondary'
@@ -89,7 +89,7 @@ export default function (props) {
             className="form__controller--button"
             onClick={props.closeClicked}
           >
-            کنسل
+            cancel
               </Button>
         </ValidatorForm>
       </div>

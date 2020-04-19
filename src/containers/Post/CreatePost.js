@@ -1,29 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
-  Button,
-  FormGroup,
-  FormControl,
-  Select,
-  Input,
-  MenuItem,
-  Checkbox,
-  ListItemText
+  Button, FormGroup,
+  FormControl, TextField
 } from '@material-ui/core';
-import {
-  TextValidator,
-  ValidatorForm
-} from 'react-material-ui-form-validator';
-import Editor from '../../components/Editor/postEditor';
-import {
-  postCourseImageChanged,
-  postSetCategories,
-  postTitleChanged,
-  postTagChanged,
-  postSlugChanged,
-  postSetReqPremission,
-  postChangeContent
-} from '../../store/action/';
+
+
+import { reduxForm, Field } from 'redux-form';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -32,183 +15,173 @@ class CreatePost extends Component {
     this.state = {
       errorMsg: null
     }
+
     this.submitHandler = this.submitHandler.bind(this);
+    this.renderEditor = this.renderEditor.bind(this);
+    this.renderCategoriesMultipleSelector = this.renderCategoriesMultipleSelector.bind(this);
   }
 
-  submitHandler() {
+  submitHandler(formValues) {
     this.setState({
       errorMsg: null
     });
+
+    console.log('In create Post ', formValues);
     const data = {
-      slug: this.props.slug,
-      categories: this.props.categories,
-      title: this.props.title,
-      body: this.props.postContent,
-      tags: this.props.tags,
-      file: this.props.postImage
+      slug: formValues.slug,
+      categories: formValues.categories,
+      title: formValues.title,
+      body: formValues.editor,
+      tags: formValues.tag,
+      file: formValues.file
     }
     this.props.makeNewCourse(data);
-    this.props.resetCreatePage();
+    // this.props.resetCreatePage();
   }
 
+  renderInput(formProps) {
+    return (
+      <FormControl className="form__controller">
+        <TextField
+          className="form__controller--inp"
+          fullWidth
+          margin="normal"
+          variant="filled"
+          helperText="Full width!"
+          InputLabelProps={{
+            shrink: true,
+          }}
+
+          {...formProps.input}
+        />
+      </FormControl>
+    )
+  }
+
+  renderCategoriesMultipleSelector(formProps) {
+    console.log(formProps, 'DOOOOOOO');
+    return (
+      <select
+        multiple
+        {...formProps.input}
+      >
+        {formProps.children}
+      </select>
+    )
+  }
+
+
+
+  renderEditor(formProps) {
+    return (
+      <FormControl>
+        <label className="form__controller--label"> Post Text Content </label>
+        <TextField
+          className="form__controller--inp"
+          fullWidth
+          margin="normal"
+          variant="filled"
+          helperText="Full width!"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          multiline
+          {...formProps.input}
+        />
+      </FormControl>
+    );
+  }
   render() {
     return (
-      <React.Fragment>
+      <>
         <h1> {this.state.errorMsg ? this.state.errorMsg : null} </h1>
-        <ValidatorForm onSubmit={this.submitHandler}>
+        <form onSubmit={this.props.handleSubmit(this.submitHandler)}>
           <FormGroup>
-            <FormControl className="form__controller">
-              <TextValidator
-                label="عنوان دوره"
-                className="form__controller--inp"
-                onChange={e => { this.props.postTitleChanged(e.target.value) }}
-                name="title"
-                validators={['required']}
-                errorMessages={['لطفا چیزی  را بنویسید !']}
-                value={this.props.title}
-                fullWidth
-                margin="normal"
-                variant="filled"
-                // placeholder="Placeholder"
-                helperText="Full width!"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </FormControl>
+            <Field
+              label='Title of Post'
+              name='title'
+              component={this.renderInput}
+            />
           </FormGroup>
 
-          <FormControl className="form__controller">
+          <Field
+            label='Post Slug'
+            name='slug'
+            component={this.renderInput}
+          />
 
-            <TextValidator
-              value={this.props.slug}
-              label="اسلاگ دوره"
-              className="form__controller--inp"
-              onChange={(e) => { this.props.postSlugChanged(e.target.value) }}
-              validators={['required']}
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-              name='slug'
-              // fullWidth
-              margin="normal"
-              variant="filled"
-              // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-              helperText="Full width!"
-              InputLabelProps={{
-                shrink: true,
-              }}
+          <Field
+            name='tag'
+            label='tags'
+            component={this.renderInput}
+          />
 
-            />
-          </FormControl>
-
-          <FormControl className="form__controller">
-
-            <TextValidator
-              label="تگ های دوره"
-              className="form__controller--inp"
-              value={this.props.tags}
-              onChange={e => { this.props.postTagChanged(e.target.value) }}
-              name='tag'
-              validators={['required']}
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-              margin="normal"
-              variant="filled"
-              // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-              helperText="Full width!"
-              InputLabelProps={{
-                shrink: true,
-              }}
-
-            />
-          </FormControl>
 
           <FormGroup>
+            <Field
+              name='categories'
+              label='Post Categories'
+              component={this.renderCategoriesMultipleSelector}
+            >
+              {
+                this.props.cats ? this.props.cats.map(catItem => (
+                  <option
+                    key={catItem.name}
+                    value={catItem._id}
+                    primaryTex={catItem.name}
+                  >
+                    {catItem.name}
+                  </option>
 
-            <FormControl variant="filled" className="form__controller" style={{}}>
-              <label className="form__controller--label">
-                دسته ها
-                  </label>
-              <Select
-                multiple
-                value={this.props.categories}
-                onChange={(e) => this.props.postSetCategories(e.target.value)}
-                input={<Input id="select-multiple-checkbox" />}
-                renderValue={selected => selected.join(', ')}
-              >
-                {
-                  this.props.cats ? this.props.cats.map(catItem => (
-                    <MenuItem key={catItem.name} value={catItem._id}>
-                      <Checkbox checked={this.props.categories.indexOf(catItem._id) > -1} />
-                      <ListItemText primary={catItem.name} />
-                    </MenuItem>
-                  )) : null
-                }
-
-              </Select>
-            </FormControl>
+                )) : null
+              }
+            </Field>
           </FormGroup>
 
           <FormGroup>
-
             <label className="form__controller--label">
-              لینک تصویر دوره
-                  </label>
-
-            <TextValidator
-
-              className="form__controller--inp"
+              Post's Link Address
+             </label>
+            <Field
               name='file'
-              value={this.props.postImage}
-              onChange={e => { this.props.postCourseImageChanged(e.target.value) }}
-              validators={['required']}
-              errorMessages={['لطفا چیزی  را بنویسید !']}
-              margin="normal"
-              variant="filled"
-              // placeholder="لطفا اسلاگ دوره را وارد کنید!"
-              helperText="Full width!"
-              InputLabelProps={{
-                shrink: true,
-              }}
+              label='Enter File path'
+              component={this.renderInput}
             />
           </FormGroup>
 
-          <FormGroup style={{ margin: "4rem 0 0 0" }}>
-            <label className="form__controller--label"> متن دوره </label>
-            <Editor
-            />
-          </FormGroup>
-
+          <Field
+            name='editor'
+            label='Conent Text'
+            component={this.renderEditor}
+          />
           <Button
             // disabled={!state.canSendReq}
             type="submit"
             color="primary"
             variant="contained"
+            disabled={this.props.pristine || this.props.submitting}
             style={{
               fontSize: "1.5rem"
               , margin: "3.5rem 0"
-            }}> ایجاد دوره</Button>
-        </ValidatorForm>
-      </React.Fragment>
+            }}> Create Post
+            </Button>
+
+          <Button
+            type='button'
+            disabled={this.props.pristine || this.props.submitting}
+            onClick={this.props.reset}
+          >Clear Values</Button>
+        </form>
+      </>
     )
   }
 }
 const mapStateToProps = state => {
   return {
-    slug: state.createPost.slug,
-    categories: state.createPost.categories,
-    title: state.createPost.title,
-    postConetent: state.createPost.postConetent,
-    tags: state.createPost.tag,
-    postImage: state.createPost.postImage,
     cats: state.cats.categories
   }
 };
-export default connect(mapStateToProps, {
-  postChangeContent,
-  postCourseImageChanged,
-  postSetCategories,
-  postSlugChanged,
-  postTagChanged,
-  postTitleChanged,
-  postSetReqPremission
-})(CreatePost);
+export default connect(mapStateToProps)(reduxForm({
+  form: 'createPost'
+})(CreatePost));
 

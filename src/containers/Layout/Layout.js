@@ -26,18 +26,16 @@ function Layout(props) {
     return (
         <div className="layout">
             <div className={backDropStyle} onClick={toggleMenu}></div>
-            <div className={navClasses.join(' ')} >
-                <Navigation navItemClicked={toggleMenu} />
-            </div>
+
+            <Navigation navItemClicked={toggleMenu} classes={navClasses.join(' ')} />
+
             <div className="layout__content">
                 <button onClick={rtl.toggle}>Rtltoggle</button>
                 <Header menuIconClicked={toggleMenu} />
                 <Routes />
             </div>
         </div>
-
     )
-
 }
 
 export default Layout;

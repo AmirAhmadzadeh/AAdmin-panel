@@ -32,7 +32,7 @@ export const createPost = (data) => {
       .then(response => {
         if (response.data.status) {
           dispatch(postCreatedSuccessFully(response.data))
-          dispatch(createPostInit());
+          // dispatch(createPostInit());
         }
       })
       .catch(err => {
@@ -45,9 +45,7 @@ export const postCreatedSuccessFully = () => ({
   status: true,
   type: actions.CREATE_POST_SUCCESS
 });
-export const createPostInit = () => ({
-  type: actions.CREATE_POST_INIT
-});
+
 
 // delete course 
 export const deletePost = (id) => {

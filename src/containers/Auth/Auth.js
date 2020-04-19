@@ -1,27 +1,22 @@
-
-
-
-
-
-import React, {useEffect} from 'react'
-import { useDispatch ,useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, FormControl, FormGroup } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { useInputState } from '../../hooks' ; 
-import  {  login } from '../../store/action' ;
-import { Redirect } from 'react-router-dom' ;
+import { useInputState } from '../../hooks';
+import { login } from '../../store/action';
+import { Redirect } from 'react-router-dom';
 
 const auth = (props) => {
 
   const [email, setEmail] = useInputState('');
   const [password, setPass] = useInputState('');
-  const dispatch = useDispatch() ; 
-  const loginHandler = (email,pass) => dispatch(login(email,pass))  ; 
-  const auth = useSelector(state => state.auth) ; 
- 
+  const dispatch = useDispatch();
+  const loginHandler = (email, pass) => dispatch(login(email, pass));
+  const auth = useSelector(state => state.auth);
+
   function authenticate(e) {
     e.preventDefault();
-    loginHandler(email,password) ;    
+    loginHandler(email, password);
   }
 
   useEffect(() => {
@@ -29,24 +24,22 @@ const auth = (props) => {
     ValidatorForm.addValidationRule('isPass', (value) => {
       if (value.length < 5) return false;
       return true
-    }) ; 
-  }, [password]) ; 
+    });
+  }, [password]);
 
-  if (auth.auth) return <Redirect to="/"/>
+  if (auth.auth) return <Redirect to="/" />
   return (
 
     <ValidatorForm onSubmit={authenticate} className="auth">
       <h1 className="auth_heading">
-        سلام با ایمیل و رمز عبور خود وارد شوید
+
+          FunnyCoding Admin panel 
     </h1>
       <FormGroup>
 
         <FormControl className="form__controller">
-
-
-
           <TextValidator
-            label="ایمیل"
+            label="email"
             onChange={(e) => setEmail(e.target.value)}
             name="email"
             value={email}
@@ -59,9 +52,9 @@ const auth = (props) => {
         <FormControl className="form__controller">
 
           <TextValidator
-            label="رمز ورود"
+            label="password"
             onChange={(e) => setPass(e.target.value)}
-            name="پسورد"
+            name="password"
             value={password}
             validators={['required', 'isPass']}
             errorMessages={['this field is required', 'pass is short']}
@@ -71,14 +64,13 @@ const auth = (props) => {
           <Button type="submit" color="secondary"
             disabled={(email && password) ? false : true}
             className="button button__radios">
-            وارد شدن
+             Login
         </Button>
-          <Button onClick={props.goback} color="primary" className="button button__radios">  بازگشت به صفحه ی اصلی </Button>
-
+          <Button onClick={props.goback} color="primary" className="button button__radios">
+                    GoTo App
+              </Button>
         </FormControl>
-
       </FormGroup>
-
     </ValidatorForm>);
 }
 

@@ -4,29 +4,32 @@ import EpisodeTable from './EpisodeTable/EpisodeTable';
 import CreateEpisode from './CreateEpisodes/CreateEpisode';
 import { connect } from 'react-redux';
 import { fetchEpisode, fetchCourse } from '../../store/action/';
-import {useValue} from './../../hooks';
+import { useValue } from './../../hooks';
 
 
 function Episode(props) {
-  
+
     const [value, setValue] = useValue();
-    
+
     useEffect(() => {
         props.loadCourses();
         props.loadEpsiodes();
-    }, [ value ])
+    }, [value])
 
     function getContent() {
+
         if (value === 0) {
             return <EpisodeTable episodes={props.episodes} />
         }
-        return <CreateEpisode courses={props.courses} gotoTable={ setValue(0) } />
+        return <CreateEpisode
+            courses={props.courses}
+            gotoTable={() => setValue(0)} />
     }
 
     return (
         <div className="menu">
             <h1 className="heading__scondary">
-                ویدیو ها
+                Episodes !!!
         </h1>
             <Tabs
                 value={value}
@@ -35,8 +38,8 @@ function Episode(props) {
                 textColor="primary"
                 centered
             >
-                <Tab label="مشاهده ی لیست ویدیوها " className="menu__tab-label" />
-                <Tab label="ایجاد ویدیو جدید " className="menu__tab-label" />
+                <Tab label="All Episodes" className="menu__tab-label" />
+                <Tab label="Make New Episode" className="menu__tab-label" />
             </Tabs>
             <div className="menu__cmpArea">
                 {getContent()}
