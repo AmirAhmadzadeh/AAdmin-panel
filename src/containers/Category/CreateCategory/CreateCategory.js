@@ -1,53 +1,60 @@
 import React from 'react';
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  Button,
-  FormGroup,
-  TextField
-} from '@material-ui/core';
+import { FormControl,Button,FormGroup,TextField} from '@material-ui/core';
 
 import { reduxForm, Field } from 'redux-form';
 
 function CreateCategory(props) {
 
-  // const [disabledButton, toggle, setDisabledButton] = useBoolean();
   const onSubmitHandler = (formValues) => {
 
-    console.log(formValues);
-    // props.createNewCategory({
-    //   name: name,
-    //   slug: slug,
-    //   parent: level
-    // });
+    props.createNewCategory({
+      name: formValues.name,
+      slug: formValues.slug,
+      parent: formValues.level
+    });
+  }
+  const renderError = meta => { 
+    return meta.touched &&
+      ((meta.error && <span className='validation_error'>{meta.error}</span>) ||
+        (meta.warning && <span className='validation_warning'>{meta.warning}</span>))
   }
   const renderInput = (formProps) => {
     return (
       <FormControl className="form__controller">
-        <TextField
-          className="form__controller--inp"
-          {...formProps.input}
-        />
-      </FormControl>
+      <label
+        className="form__controller--label"
+       >
+        {formProps.label}
+      </label>
+      <TextField
+        {...formProps.input}
+        className="form__controller--inp"
+        fullWidth
+        margin="normal"
+        variant="filled"
+        helperText={formProps.meta.touched && formProps.meta.invalid}
+        error={formProps.meta.touched && formProps.meta.invalid}
+      />
+      {renderError(formProps.meta)}
+    </FormControl>
     )
   }
 
   const renderLevelSelector = (formProps) => {
     return (
       <FormControl className="form__controller">
-        <InputLabel
-          htmlFor="age-native-simple"
+        <label
           className="form__controller--label">
-          Category Level
-               </InputLabel>
-        <Select
+          {formProps.label}
+        </label>
+        <select
           className="form__controller--select"
           native
-          {...formProps}
+          {...formProps.input}
         >
           {formProps.children}
-        </Select>
+        </select>
+        {renderError(formProps.meta)}
       </FormControl>
     )
   }
@@ -72,6 +79,7 @@ function CreateCategory(props) {
             label='Category Level'
             component={renderLevelSelector}
           >
+            <option></option>
             <option value='none' className="form__controller--option">
               main category
                </option>
@@ -92,7 +100,7 @@ function CreateCategory(props) {
           variant="contained"
           className="form__controller--button"
           type="submit"
-        // disabled={disabledButton}
+              
         >
           Create!
               </Button>
@@ -101,7 +109,16 @@ function CreateCategory(props) {
 
   )
 }
-
+const validate = values => {
+  const errors = {} ; 
+  ['name' , 'level' , 'slug'].forEach(field => { 
+    if (!values[field]) { 
+      errors[field] = 'Required !'
+    }
+  }); 
+  return errors ;  
+}
 export default reduxForm({
   form: 'createCategory'
+  ,validate
 })(CreateCategory);  

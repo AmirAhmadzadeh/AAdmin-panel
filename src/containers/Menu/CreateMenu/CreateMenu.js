@@ -1,63 +1,96 @@
 import React from 'react';
 import {
   FormControl,
-  InputLabel,
-  Select, Button,
+  Button,
   FormGroup,
   TextField
 } from '@material-ui/core';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
-import { useInputState, useValue } from './../../../hooks/';
 import { Field, reduxForm } from 'redux-form';
 
 
 function CreateMenu(props) {
 
 
-  function handleSubmit() {
-    console.log(props);
+  function onSubmitHandler(formValues) {
     props.createNewMenu({
-      name: props.form.createMenu.values.name,
-      link: props.createMenu.values.link,
-      parent: props.createMenu.values.level
+      name: formValues.name,
+      link: formValues.link,
+      parent: formValues.level
     });
   }
 
   function renderError(meta) {
-    if (meta.touched && meta.error) {
-      return (
-        meta.error
-      )
-    } else {
-      return null;
-    }
+    return meta.touched &&
+    ((meta.error && <span className='validation_error'>{meta.error}</span>) ||
+    (meta.warning && <span className='validation_warning'>{meta.warning}</span>))
   }
 
   function renderInput(formProps) {
-    console.log(formProps);
     return (
       <FormControl className="form__controller">
-        <TextField
-          {...formProps.input}
-          className="form__controller--inp"
-          name="name"
-        />
-      </FormControl>
+      <label
+        className="form__controller--label"
+       >
+        {formProps.label}
+      </label>
+      <TextField
+        {...formProps.input}
+        className="form__controller--inp"
+        fullWidth
+        margin="normal"
+        variant="filled"
+        helperText={formProps.meta.touched && formProps.meta.invalid}
+        error={formProps.meta.touched && formProps.meta.invalid}
+      />
+      {renderError(formProps.meta)}
+    </FormControl>
     )
   }
 
   function renderLevelSelector(formProps) {
     return (
       <FormControl className="form__controller">
-        <InputLabel
-          htmlFor="age-native-simple"
-          className="form__controller--label"> menu Level</InputLabel>
-        <Select
-          className="form__controller--select"
-          native
-          {...formProps.input}
-        >
-          <option value='none' className="form__controller--option"> Main Level </option>
+      <label
+        className="form__controller--label">
+        {formProps.label}
+      </label>
+      <select
+        className="form__controller--select"
+        native
+        {...formProps.input}
+      >
+        {formProps.children}
+      </select>
+      {renderError(formProps.meta)}
+    </FormControl>
+    )
+  }
+
+  return (
+    <div className="menu__createMenu">
+      <form onSubmit={props.handleSubmit(onSubmitHandler)}>
+        <FormGroup>
+          <Field
+            component={renderInput}
+            name='name'
+            label='menuTitle'
+          />
+
+          <Field
+            label='link'
+            name='link'
+            component={renderInput}
+          />
+
+          <Field
+            label='menuLevel'
+            name='level'
+            component={renderLevelSelector}
+          >
+          <option></option>
+           <option
+            value='none'
+            className="form__controller--option"> Main Level </option>
           {
             props.menus ? props.menus.map(menuItme => {
               return (
@@ -69,32 +102,7 @@ function CreateMenu(props) {
               )
             }) : "Loading..."
           }
-        </Select>
-      </FormControl>
-    )
-  }
-
-  return (
-    <div className="menu__createMenu">
-      <ValidatorForm onSubmit={handleSubmit}>
-        <FormGroup>
-
-          <Field
-            component={renderInput}
-            name='name'
-            label='menuTitle'
-          />
-          <Field
-            label='link'
-            name='link'
-            component={renderInput}
-          />
-
-          <Field
-            label='menuLevel'
-            name='level'
-            component={renderLevelSelector}
-          />
+          </Field>
         </FormGroup>
         <Button
           color="primary"
@@ -103,13 +111,24 @@ function CreateMenu(props) {
           type="submit"
         // disabled={disabledButton}
         >
-          create !
+          create!
             </Button>
-      </ValidatorForm>
+      </form>
     </div>
   )
 }
-
+const validate = vals => {
+  const errors =  {} ;  
+  ['name',
+  'link',
+  'level'].forEach(field => { 
+    if(!vals[field]) {
+      errors[field] = 'Required...' 
+    }
+  })
+  return errors ; 
+}
 export default reduxForm({
-  form: 'createMenu'
+  form: 'createMenu' , 
+  validate
 })(CreateMenu);  

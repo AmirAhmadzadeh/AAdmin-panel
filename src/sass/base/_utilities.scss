@@ -7,9 +7,9 @@ a{
 }
 
 .heading{
-    font-size: 3rem ;  
-    display: inline-block ;
-    font-weight: 300 ;
+    font-weight: bolder;
+    font-size: 4rem ; display: inline-block ;
+    // font-weight: 300 ;
     transition: all .5s ;
     transform:translateX(-3rem);
     &:hover{
@@ -22,9 +22,30 @@ a{
    
     &__scondary{  
         color: $color-black ; 
-     
+       
     }
-
+    &__title { 
+        
+    }
 
     
 }
+
+
+.validation { 
+   transition: all 5s ease-in-out ;
+   width: 0;
+   margin: .2rem;
+   &_error{ 
+        background-color: rgba(red, .2);
+        border: 2px solid darkred;
+        padding:1rem ;
+        width: 100%; 
+    }     
+
+    &_warning{ 
+        background-color: orange; 
+        border: 2px solid darkorange;
+    }
+
+} 

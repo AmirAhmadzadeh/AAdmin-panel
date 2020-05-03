@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {
-  Button, FormGroup,
-  FormControl, TextField ,  
+  Button, FormGroup, FormControl, TextField,
 } from '@material-ui/core';
-
 import { reduxForm, Field } from 'redux-form';
 
 class CreatePost extends Component {
@@ -18,8 +16,14 @@ class CreatePost extends Component {
     this.submitHandler = this.submitHandler.bind(this);
     this.renderEditor = this.renderEditor.bind(this);
     this.renderCategoriesMultipleSelector = this.renderCategoriesMultipleSelector.bind(this);
+    // this.renderError = this.renderError.bind(this) ;
+    this.renderInput = this.renderInput.bind(this) ; 
   }
-
+  renderError(meta){
+    return meta.touched &&
+      ((meta.error && <span className='validation_error'>{meta.error}</span>) ||
+        (meta.warning && <span className='validation_warning'>{meta.warning}</span>))
+  }
   submitHandler(formValues) {
     this.setState({
       errorMsg: null
@@ -42,35 +46,43 @@ class CreatePost extends Component {
     // formProps.meta.invalid
     return (
       <FormControl className="form__controller">
-         <label 
-            for={formProps.label}>
-           {formProps.label}
-         </label> 
+        <label
+          className="form__controller--label"
+          for={formProps.label}>
+          {formProps.label}
+        </label>
         <TextField
           className="form__controller--inp"
           fullWidth
           margin="normal"
           variant="filled"
           helperText={formProps.meta.touched && formProps.meta.invalid}
-          error={formProps.meta.touched}
+          error={formProps.meta.touched && formProps.meta.invalid}
           InputLabelProps={{
             shrink: true,
           }}
 
           {...formProps.input}
         />
+        {this.renderError(formProps.meta)}
       </FormControl>
     )
   }
 
   renderCategoriesMultipleSelector(formProps) {
     return (
-      <select
-        multiple
-        {...formProps.input}
-      >
-        {formProps.children}
-      </select>
+      <FormControl className="form__controller" variant="filled">
+        <label className="form__controller--label">
+           {formProps.label}
+        </label>
+        <select
+          multiple
+          {...formProps.input}
+        >
+          {formProps.children}
+        </select>
+          {this.renderError(formProps.meta)}
+      </FormControl>
     )
   }
 
@@ -79,10 +91,10 @@ class CreatePost extends Component {
   renderEditor(formProps) {
     return (
       <FormControl>
-        <label 
-        // className="form__controller--label"
-        > 
-        { formProps.label } </label>
+        <label
+        className="form__controller--label"
+        >
+          {formProps.label} </label>
         <TextField
           className="form__controller--inp"
           fullWidth
@@ -95,13 +107,12 @@ class CreatePost extends Component {
           multiline
           {...formProps.input}
         />
+        {this.renderError(formProps.meta)}
       </FormControl>
     );
   }
 
-  renderFormHelper() { 
-    
-  }
+  
   render() {
     return (
       <>
@@ -150,9 +161,6 @@ class CreatePost extends Component {
           </FormGroup>
 
           <FormGroup>
-            <label className="form__controller--label">
-              Post's Link Address
-             </label>
             <Field
               name='file'
               label='Enter File path'
@@ -186,29 +194,27 @@ class CreatePost extends Component {
       </>
     )
   }
-} 
+}
 
 const validate = values => {
   const errors = {}
-  
   const requiredFields = [
-    'title' , 
-    'slug' , 
-    'tag' , 
-    'categories' , 
-    'file' , 
-    'editor' , 
-  ]  ; 
-  requiredFields.forEach(field => { 
+    'title',
+    'slug',
+    'tag',
+    'categories',
+    'file',
+    'editor',
+  ];
+  requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required'
-    } 
+    }
   })
-  if (values['categories'] && values['categories'].length < 1) { 
+  if (values['categories'] && values['categories'].length < 1) {
     errors['categories'] = 'Please Select Some Categories !'
   }
-  console.log('hello errors' , errors) ; 
-  return errors ;  
+  return errors;
 }
 const mapStateToProps = state => {
   return {
@@ -216,7 +222,7 @@ const mapStateToProps = state => {
   }
 };
 export default connect(mapStateToProps)(reduxForm({
-  form: 'createPost' , 
+  form: 'createPost',
   validate
 })(CreatePost));
 

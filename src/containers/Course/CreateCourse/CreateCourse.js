@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import {
   Button,
   FormGroup,
   FormControl,
   Select,
-  Input,
-  MenuItem,
-  Checkbox,
-  ListItemText,
   TextField,
 } from '@material-ui/core';
 import { useValue } from './../../../hooks/';
@@ -36,37 +31,48 @@ function CreateCourse(props) {
     props.makeNewCourse(data);
   }
 
-  const isNumber = (n) => (!isNaN(parseFloat(n)) && isFinite(n))
   function renderEditor(formProps) {
     return (
       <FormControl>
-        <label className="form__controller--label"> Post Text Content </label>
+        <label className="form__controller--label">
+          {formProps.label}
+        </label>
         <TextField
           className="form__controller--inp"
           fullWidth
           margin="normal"
           variant="filled"
-          helperText="Full width!"
+          helperText={formProps.meta.touched && formProps.meta.invalid}
+          error={formProps.meta.touched}
           InputLabelProps={{
             shrink: true,
           }}
           multiline
           {...formProps.input}
         />
+        {renderError(formProps.meta)}
       </FormControl>
     );
   }
   const renderInput = (formProps) => {
     return (
       <FormControl className="form__controller">
+        <label
+          className="form__controller--label"
+        >
+          {formProps.label}
+        </label>
         <TextField
           {...formProps.input}
           className="form__controller--inp"
           fullWidth
           margin="normal"
           variant="filled"
-          helperText="Full width!"
+          helperText={formProps.meta.touched && formProps.meta.invalid}
+          error={formProps.meta.touched}
         />
+
+        {renderError(formProps.meta)}
       </FormControl>
     )
   }
@@ -76,21 +82,28 @@ function CreateCourse(props) {
         <label className="form__controller--label">
           {formProps.input.label}
         </label>
-        <Select
+        <select
           className="form__controller--select"
           native
           {...formProps.input}
         >
           {formProps.children}
-        </Select>
+        </select>
+        {renderError(formProps.meta)}
       </FormControl>
     )
+  }
+
+  const renderError = meta => {
+    return meta.touched &&
+      ((meta.error && <span className='validation_error'>{meta.error}</span>) ||
+        (meta.warning && <span className='validation_warning'>{meta.warning}</span>))
   }
   const renderCategorySelector = (formProps) => {
     return (
       <FormControl variant="filled" className="form__controller" style={{}}>
-        <label className="form__controller--label">
-          {formProps.input.label}
+        <label>
+          {formProps.label}
         </label>
         <select
           multiple
@@ -98,6 +111,8 @@ function CreateCourse(props) {
         >
           {formProps.children}
         </select>
+
+        {renderError(formProps.meta)}
       </FormControl>
     )
   }
@@ -126,7 +141,7 @@ function CreateCourse(props) {
           component={renderInput}
         />
         <Field
-          label='slug'
+          label='tags'
           name='tags'
           component={renderInput}
         />
@@ -138,6 +153,7 @@ function CreateCourse(props) {
             label='Type Of Course'
             component={renderKindCourseSelector}
           >
+            <option></option>
             <option value="free" className="form__controller--option">  رایگان </option>
             <option value="vip" className="form__controller--option">  دسترسی با عضویت ویژه </option>
             <option value="cash" className="form__controller--option">نقدی </option>
@@ -164,10 +180,6 @@ function CreateCourse(props) {
         </FormGroup>
 
         <FormGroup>
-
-          <label className="form__controller--label">
-            Picture Of Cousrse
-                </label>
           <Field
             component={renderInput}
             name='file'
@@ -183,26 +195,52 @@ function CreateCourse(props) {
             name='courseContentText'
             label='courseConetentTex'
           />
-
-          {/* <Editor
-          /> */}
         </FormGroup>
 
         <Button
-          // disabled={!state.canSendReq}
           type="submit"
           color="primary"
           variant="contained"
           style={{
             fontSize: "1.5rem"
             , margin: "3.5rem 0"
-          }}> ایجاد دوره
+          }}>  publish course 
             </Button>
       </form>
     </>
   )
 }
+const validate = values => {
+  const errors = {};
+  const isNumber = (n) => (!isNaN(parseFloat(n)) && isFinite(n))
+
+  const fileds = [
+    'title',
+    'price',
+    'slug',
+    'tags',
+    'selectedKindOfCourse',
+    'categoires',
+    'file',
+    'courseContentText'
+  ];
+  fileds.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required !!!'
+    };
+  });
+
+  if (values['price'] && !isNumber(values['price'])) {
+    errors['price'] = 'plese write a number !!!!!';
+  }
+  if (values['categoires'] && values['categoires'].length < 1) {
+    errors['categoires'] = 'Required !!';
+  }
+  console.log('hey errors ', errors);
+  return errors;
+}
 
 export default reduxForm({
-  form: 'createCourse'
+  form: 'createCourse',
+  validate
 })(CreateCourse);

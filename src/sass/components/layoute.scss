@@ -6,6 +6,15 @@
 
   &__content {
     flex-basis: 80%;
+
+    @include respond(phone){ 
+      flex-basis: 90% ;
+      margin: auto;
+    }
+    @include respond(port-tab){ 
+      flex-basis: 90% ;
+      margin: auto;
+    } 
   }
   &__navigation {
     flex-basis: 30%;

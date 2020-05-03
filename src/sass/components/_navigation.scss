@@ -2,7 +2,7 @@
 .navigation {
   @include respond(from-port) {
     width: 15%;
-    position: absolute;
+    // position: absolute;
   }
   height: 100vh;
   background-image: linear-gradient(rgba($color-black, 0.75) 100%, transparent),

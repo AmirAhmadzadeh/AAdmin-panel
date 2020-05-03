@@ -35,9 +35,9 @@ const menuTable = (props) => {
             <Table className="table" >
                 <TableHead className="table__head">
                     <TableRow className="table_row">
-                        <TableCell align="right" className="table__cell">عنوان منو</TableCell>
-                        <TableCell align="right" className="table__cell">لینک</TableCell>
-                        <TableCell align="right" className="table__cell">تنظیمات</TableCell>
+                        <TableCell align="right" className="table__cell"> menu name</TableCell>
+                        <TableCell align="right" className="table__cell">link</TableCell>
+                        <TableCell align="right" className="table__cell">opreations</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
