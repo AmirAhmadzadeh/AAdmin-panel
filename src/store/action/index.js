@@ -1,17 +1,18 @@
-//menu 
+//menu
 export {
     fetchmenu,
     makeNewMenu,
     deleteMenu
 } from './menu';
 
-// comment 
+// comment
 export {
-    fetchComment
+    fetchComment,
+    approveComment
 } from './comments';
 
 
-// categories 
+// categories
 export {
     fetchCategory,
     makeNewCat,
@@ -19,7 +20,7 @@ export {
     editCategory
 } from './category';
 
-// posts 
+// posts
 export {
     createPost,
     // createPostInit,
@@ -28,7 +29,7 @@ export {
 } from './post';
 
 
-// course 
+// course
 export {
     fetchCourse,
     createCourse,
@@ -37,7 +38,7 @@ export {
 } from './course';
 
 
-// episodes 
+// episodes
 export {
     fetchEpisode,
 
@@ -45,7 +46,7 @@ export {
 } from './episode';
 
 
-// authenticate !! 
+// authenticate !!
 export {
     login
 } from './auth';

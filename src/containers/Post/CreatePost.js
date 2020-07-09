@@ -17,7 +17,7 @@ class CreatePost extends Component {
     this.renderEditor = this.renderEditor.bind(this);
     this.renderCategoriesMultipleSelector = this.renderCategoriesMultipleSelector.bind(this);
     // this.renderError = this.renderError.bind(this) ;
-    this.renderInput = this.renderInput.bind(this) ; 
+    this.renderInput = this.renderInput.bind(this) ;
   }
   renderError(meta){
     return meta.touched &&
@@ -42,7 +42,7 @@ class CreatePost extends Component {
   }
 
   renderInput(formProps) {
-    // formProps.meta.touched 
+    // formProps.meta.touched
     // formProps.meta.invalid
     return (
       <FormControl className="form__controller">
@@ -112,7 +112,7 @@ class CreatePost extends Component {
     );
   }
 
-  
+
   render() {
     return (
       <>
@@ -146,7 +146,7 @@ class CreatePost extends Component {
               component={this.renderCategoriesMultipleSelector}
             >
               {
-                this.props.cats ? this.props.cats.map(catItem => (
+                this.props.cats ? this.props.cats.categories.map(catItem => (
                   <option
                     key={catItem.name}
                     value={catItem._id}

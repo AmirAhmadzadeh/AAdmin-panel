@@ -1,19 +1,16 @@
 import React from 'react';
 import { FormControl,Button,FormGroup,TextField} from '@material-ui/core';
-
 import { reduxForm, Field } from 'redux-form';
 
 function CreateCategory(props) {
-
   const onSubmitHandler = (formValues) => {
-
     props.createNewCategory({
       name: formValues.name,
       slug: formValues.slug,
       parent: formValues.level
     });
   }
-  const renderError = meta => { 
+  const renderError = meta => {
     return meta.touched &&
       ((meta.error && <span className='validation_error'>{meta.error}</span>) ||
         (meta.warning && <span className='validation_warning'>{meta.warning}</span>))
@@ -84,7 +81,7 @@ function CreateCategory(props) {
               main category
                </option>
             {
-              props.cats ? props.cats.map(catItme => {
+              props.cats.categories ? props.cats.categories.map(catItme => {
                 return (
                   <option
                     value={catItme._id}
@@ -100,25 +97,25 @@ function CreateCategory(props) {
           variant="contained"
           className="form__controller--button"
           type="submit"
-              
+
         >
           Create!
               </Button>
       </form>
     </div>
-
   )
 }
+
 const validate = values => {
-  const errors = {} ; 
-  ['name' , 'level' , 'slug'].forEach(field => { 
-    if (!values[field]) { 
+  const errors = {} ;
+  ['name' , 'level' , 'slug'].forEach(field => {
+    if (!values[field]) {
       errors[field] = 'Required !'
     }
-  }); 
-  return errors ;  
+  });
+  return errors ;
 }
 export default reduxForm({
   form: 'createCategory'
   ,validate
-})(CreateCategory);  
+})(CreateCategory);

@@ -7,6 +7,21 @@ import { editCategory } from '../../../store/action/';
 import { useDispatch } from 'react-redux';
 
 
+//useStyles
+const useStyles = makeStyles((theme) => {
+  return {
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: '#fff',
+      border: '2px solid #000',
+      top: '50%',
+      left: '50%',
+      transform: `translate(-50%,-50%)`
+    }
+  }
+});
+
 export default function (props) {
 
   const classes = useStyles();
@@ -22,10 +37,10 @@ export default function (props) {
     editCategoryHandler(props.categoryId, { name, slug, parent: level });
     props.closeClicked();
   }
-  //useEffect 
+  //useEffect
 
 
-  //View 
+  //View
   return (
     <Paper className={classes.paper}>
       <div className="menu__createMenu">
@@ -97,17 +112,3 @@ export default function (props) {
   );
 }
 
-//useStyles   
-const useStyles = makeStyles((theme) => {
-  return {
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: '#fff',
-      border: '2px solid #000',
-      top: '50%',
-      left: '50%',
-      transform: `translate(-50%,-50%)`
-    }
-  }
-});

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, {   useEffect } from 'react';
 import DisApprovedComments from './disApprovedComments/disApprovedComments';
 import ApprovedComments from './approvedComments/ApprovedComments';
 import { Tabs, Tab } from '@material-ui/core';
-import { connect } from 'react-redux';
-import { fetchComment  } from '../../store/action/';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchComment , approveComment } from '../../store/action/';
 import { useValue } from './../../hooks';
 
 
@@ -11,18 +11,16 @@ import { useValue } from './../../hooks';
 
 function Commnet(props) {
     const [value, setValue] = useValue();
-
+    const dispatch = useDispatch()  ;
+    const  comments = useSelector(state => state.comments.comments)
     useEffect(() => {
-
         console.log(`Hello In  Mount`);
-        props.loadcomments(value === 0 ? true : false);
-
+        dispatch(fetchComment(value === 0 ? true : false))
     }, [value]);
 
-
     function addToApprovedHandler(cmId) {
-        // console.log('amir in addTo Approved Handler', cmId);
-        props.approveComment(cmId);
+        console.log('amir in addTo Approved Handler', cmId);
+        dispatch(approveComment(cmId))
         setValue(0);
     }
 
@@ -30,12 +28,12 @@ function Commnet(props) {
 
         if (value === 0) {
             return <ApprovedComments
-                comments={props.comments} />
+                comments={comments} />
         }
         else {
             return <DisApprovedComments
                 addToApproved={addToApprovedHandler}
-                comments={props.comments} />
+                comments={comments} />
         }
     }
 
@@ -44,7 +42,7 @@ function Commnet(props) {
     return (
         <div className="menu">
             <h1 className="heading__scondary">
-                کامنت ها
+                Comments
                 </h1>
             <Tabs
                 value={value}
@@ -53,8 +51,8 @@ function Commnet(props) {
                 textColor="primary"
                 centered
             >
-                <Tab label="کامنت های تایید شده" className="menu__tab-label" />
-                <Tab label="کامنت های تایید نشده" className="menu__tab-label" />
+                <Tab label="ApprovedComments" className="menu__tab-label" />
+                <Tab label="DisApprovedComments" className="menu__tab-label" />
             </Tabs>
             <div className="menu__cmpArea">
                 {getContent()}
@@ -65,24 +63,7 @@ function Commnet(props) {
 }
 
 
-const mapDispatchToProps = dispatch => {
 
-    return {
-        loadcomments: (approveSituation) => dispatch(fetchComment(approveSituation)),
-        // approveComment: (id) => dispatch(approveComment(id))
-    }
-}
-
-const mapStateToProps = state => {
-
-    return {
-        comments: state.comments.comments
-    }
-
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Commnet);
+export default Commnet;
 
 

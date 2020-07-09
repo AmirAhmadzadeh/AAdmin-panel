@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fetchmenu, makeNewMenu, deleteMenu } from '../../store/action/';
 import { useValue } from './../../hooks/';
 
+
 function Menu(props) {
     const [value, setValue] = useValue();
     function handleMakeNewMenu(data) {
@@ -25,7 +26,8 @@ function Menu(props) {
         return <CreateMenu createNewMenu={handleMakeNewMenu} menus={props.menus} />
     }
 
-    return (<div className="menu">
+    return (
+        <div className="menu">
         <h1 className="heading__scondary">
             Menus
         </h1>
@@ -63,4 +65,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);  
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

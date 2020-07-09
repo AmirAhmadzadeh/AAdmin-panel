@@ -35,7 +35,7 @@ function Course(props) {
 
         return (<CreateCourse
             makeNewCourse={handleCreateCourse}
-            cats={props.cats}
+            cats={props.cats.categories}
             created={props.created} />)
 
     }
@@ -81,7 +81,7 @@ const mapDispatchToProps = dispatch => {
 
         deleteCourse: (_id) => dispatch(deleteCourse(_id)),
 
-        // resetCreatePage : () => dispatch(createCourseInit())  
+        // resetCreatePage : () => dispatch(createCourseInit())
     }
 }
 
@@ -101,4 +101,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Course);  
+export default connect(mapStateToProps, mapDispatchToProps)(Course);

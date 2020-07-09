@@ -3,21 +3,19 @@ import Layout from './containers/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
-
-function app() {
+function AuthCheck() {
   const { auth } = useSelector(state => state.auth);
-  function getContent() {
-    if (auth) return <Layout />
-    return <Auth />
-  }
+  if (!auth) return <Auth />
+  return <Layout />
+}
 
+export default function() {
   return (
     <div className="app" >
-      {getContent()}
+        <AuthCheck/>
     </div>
   );
 }
 
 
 
-export default app;
